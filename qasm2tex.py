@@ -58,8 +58,8 @@
 #           name    = name of the cbit, eg c0
 #           initval = initial value (optional), eg 0
 # H       - single qubit operator ("hadamard")
-# X       - single qubit operator 
-# Y       - single qubit operator 
+# X       - single qubit operator
+# Y       - single qubit operator
 # Z       - single qubit operator
 # S       - single qubit operator
 # T       - single qubit operator
@@ -73,7 +73,7 @@
 # cnot    - two-qubit CNOT
 # c-z     - two-qubit controlled-Z gate
 # c-x     - two-qubit controlled-X gate
-# swap    - two-qubit swap operation 
+# swap    - two-qubit swap operation
 # Utwo    - two-qubit operation U
 # ZZ      - two-qubit controlled-Z gate, symmetric notation; two filled circles
 # SS      - two-qubit gate, symmetric; open squares
@@ -83,7 +83,7 @@
 #
 # Patched 02-Nov-04 by P. Oscar Boykin to allow arbitrarily large circuits
 # (old version used to run out when chr() returned a non-alpha character)
-# 
+#
 #-----------------------------------------------------------------------------
 #
 # $Log: qasm2tex.py,v $
@@ -190,12 +190,12 @@ def do_error(msg):	# global error handler
 #-----------------------------------------------------------------------------
 
 def num2name(num):	# convert a number to a name
-	if( num == 0 ):
-	  return "";
-	elif( num <= 26 ):
-	  return chr(num+64)
-	else:
-	  return chr( (num % 26) + 64) + num2name(num/26)
+    if( num == 0 ):
+        return "";
+    elif( num <= 26 ):
+        return chr(num+64)
+    else:
+        return chr( (num % 26) + 64) + num2name(num/26)
 
 #-----------------------------------------------------------------------------
 
@@ -216,13 +216,13 @@ class qgate:		# quantum gate class
 
         # do a quick syntax check to make sure number of operands is correct
         # and that the gate exists
-        if not GateMasterDef.has_key(self.name):
+        if self.name not in GateMasterDef:
             s = (self.linenum, self.name, self.args)
             do_error("[qgate] OOPS! line %d unknown gate op %s on %s" % s)
 
         # retrieve information about gate from master table
         (self.nbits, self.nctrl, self.texsym) = GateMasterDef[self.name]
-            
+
         # check if the operand has the right number of bits
         if (len(self.qubits) != self.nbits): # right # bits?
             s = (self.linenum, self.name + " " + self.args)
@@ -289,7 +289,7 @@ class qgate:		# quantum gate class
                 myid = self.xy[qb]	# non-first bits get \gspace{u}
                 w = wires[self.wiretype[qb]]
                 s.append(r'\def\%s{\gspace{%s}%s\A{%s}}' % (myid,u,w,myid))
-                
+
             # now do control qubits
             controls = self.qubits[:nctrl]
             for k in range(nctrl):	# loop over all control qubits
@@ -307,17 +307,17 @@ class qgate:		# quantum gate class
                     self.endtex += r'\ar@{%c}"%s";"%s"' %(wt,xybot,self.xy[qb])
 
             # done with multi-qubit op
-            return(join(s,'\n'))		# return with latex def's
+            return( '\n'.join(s))		# return with latex def's
 
         def ctrl_op(nctrl,u):		# controlled operation
             s = []
             for k in range(nctrl):	# loop over all control qubits
                 s.append(defid(k,r'\b'))		# bullets on controls
-            s.append(defid(nctrl,u))	# add target op 
-            s = join(s,'\n')
+            s.append(defid(nctrl,u))	# add target op
+            s = '\n'.join(s)
 
             # create vertical wires
-            qbtarget = self.xy[self.qubits[-1]]	
+            qbtarget = self.xy[self.qubits[-1]]
             wt = get_wiretype(self.qubits[0:-1])
             for qb in self.qubits[0:-1]: # loop over all ctrl-target pairs
                 # endtex = latex commands which appear after xymatrix body
@@ -333,7 +333,8 @@ class qgate:		# quantum gate class
             for k in range(len(ytab)-1):
                 if (ytab[k+1]-ytab[k]!=1):
                     s = (self.linenum, self.name + " " + self.args)
-                    do_error('[qgate] OOPS! line %d multi-qubit gate targets not consecutive %s' % s)
+                    do_error('[qgate] OOPS! line %d multi-qubit gate targets'\
+                            'not consecutive %s' % s)
 
         def double_sym_gate(texsym):
             wt = get_wiretype(self.qubits)
@@ -361,13 +362,13 @@ class qgate:		# quantum gate class
             return(do_multiqubit(nbits,nctrl,texsym))
         if(nctrl==0):
             return(defid(0,texsym))		# single qubit op
-        else: 
+        else:
             return(ctrl_op(nctrl,texsym))	# controlled-single-qubit op
 
 #-----------------------------------------------------------------------------
 
 class qasm_parser:	# parser for qasm; inputs lines, returns
-    			# tables of comments, names, and gates
+                        # tables of comments, names, and gates
 
     def __init__(self,fp):
 
@@ -377,13 +378,13 @@ class qasm_parser:	# parser for qasm; inputs lines, returns
         self.comments = ''	# string with comments from original qasm file
 
         linenum = 0		# line number counting, for error messages
-        
+
         for line in fp:		# loop over input lines
 
             linenum += 1	# line number counter
-            
+
             if(line[0]=='#'):
-                self.comments += line 
+                self.comments += line
                 continue
             else:
                 self.comments += "% " + line 	# optional - include all input
@@ -417,8 +418,8 @@ class qasm_parser:	# parser for qasm; inputs lines, returns
                 else:
                     texsym = '\op{%s}' % tex
                 nctrl = int(nctrl)
-                if GateMasterDef.has_key(name):
-                    print "[qasm_parser] oops! duplicate def for op %s" % line
+                if name in GateMasterDef:
+                    print("[qasm_parser] oops! duplicate def for op %s" % line)
                 else:
                     GateMasterDef[name] = (nctrl+1, nctrl, texsym)
                 # print "definition: %s" % m.group(1)
@@ -432,8 +433,8 @@ class qasm_parser:	# parser for qasm; inputs lines, returns
                 texsym = m.group(2)
                 nbits = int(nbits)
                 nctrl = int(nctrl)
-                if GateMasterDef.has_key(name):
-                    print "[qasm_parser] oops! duplicate def for op %s" % line
+                if name in GateMasterDef:
+                    print("[qasm_parser] oops! duplicate def for op %s" % line)
                 else:
                     GateMasterDef[name] = (nbits, nctrl, texsym)
                 # print "definition: %s" % m.group(1)
@@ -456,7 +457,7 @@ class qcircuit:		# quantum circuit class
         self.is_cbit = {}	# flags to see if a bit is qubit or cbit
         self.setnames(bitnames,typetab)	# set names & types of qubits
         self.qbtab = {}		# initialize qubit table (assoc array)
-				# each element in qbtab holds an array
+                                # each element in qbtab holds an array
                                 # of IDs for gates acting on that qubit
         self.qb2idx = {}	# translate from name to index
         k = 1
@@ -488,9 +489,9 @@ class qcircuit:		# quantum circuit class
         gate.id = len(self.optab)-1	# give the gate a unique ID number
         # print "%% adding op %s(%s) IDs: %s" % (gate.name,gate.args,
         #                                       join(gate.xy.values(),','))
-        
+
         for qb in gate.qubits:		# put gate on qubits it acts upon
-            if(self.qbtab.has_key(qb)==0):	# check for syntax error
+            if qb not in self.qbtab:	# check for syntax error
                 s = (qb,gate.linenum,gate.name + ' ' + gate.args)
                 do_error('[qcircuit] No qubit %s in line %d: "%s"' % s)
             if(len(self.qbtab[qb])==0):	# if first gate, timestep = 1
@@ -506,17 +507,17 @@ class qcircuit:		# quantum circuit class
         if(gate.timeseq > len(self.circuit)):	# add new timestep if necessary
             self.circuit.append([])
         self.circuit[gate.timeseq-1].append(gate.id)	# add gate to circuit
-        
+
     def output_sequence(self):	# output time-sequence of gates
         k = 1				# timestep counter
         for timestep in self.circuit:	# loop over timesteps
-            print "%%  Time %02d:" % k
+            print("%%  Time %02d:" % k)
             for g in timestep:		# loop over events in this timestep
                 op = self.optab[g]
-                print "%%    Gate %02d %s(%s)" % (op.id,
-                                                     op.name,op.args)
+                print("%%    Gate %02d %s(%s)" % (op.id,
+                                                     op.name,op.args))
             k += 1
-        print ""
+        print("")
 
     def output_matrix(self):	# output circuit matrix, of qubit vs timestep
 
@@ -524,13 +525,13 @@ class qcircuit:		# quantum circuit class
             self.make_matrix()
 
         k = 0
-        print "% Qubit circuit matrix:\n%"
+        print("% Qubit circuit matrix:\n%")
         for y in self.matrix:	# loop over qubits
-            print '%% %s: %s' % (self.qubitnames[k],join(y,', '))
+            print('%% %s: %s' % (self.qubitnames[k], ', '.join(y)))
             k += 1
 
     def make_matrix(self):	# make circuit matrix, of qubit vs timestep
-        
+
         self.matrix = []
         ntime = len(self.circuit)+2	# total number of timsteps
         wires = ['n','N']		# single or double wire for qubit/cbit
@@ -544,7 +545,7 @@ class qcircuit:		# quantum circuit class
                 g = self.optab[gid]	# gate with that ID
                 while(g.timeseq>k):	# output null ops until gate acts
                     self.matrix[-1].append('%s  ' % wires[cbit])
-                    k += 1		# increment timestep  
+                    k += 1		# increment timestep
                 g.set_bittype(qb,cbit)	# set qubit type (cbit/qubit)
                 self.matrix[-1].append(g.xy[qb])
                 k += 1			# increment timestep
@@ -569,12 +570,12 @@ class qcircuit:		# quantum circuit class
         else:
             label = qb			# othewise use just what was specified
         if(self.is_cbit[qb]):
-            if(self.initval.has_key(qb)):	# qubit has initial value?
+            if qb in self.initval:	# qubit has initial value?
                 label = r'   {%s = %s}' % (label,self.initval[qb])
             else:
                 label = r'   {%s}' % (label)
         else:
-            if(self.initval.has_key(qb)):	# qubit has initial value?
+            if qb in self.initval:	# qubit has initial value?
                 label = r'\qv{%s}{%s}' % (label,self.initval[qb])
             else:
                 label = r' \q{%s}' % (label)
@@ -585,51 +586,51 @@ class qcircuit:		# quantum circuit class
         if(len(self.matrix)==0):	# make circuit matrix if not done
             self.make_matrix()
 
-        print ''
-        print r'\documentclass[11pt]{article}'        # output latex header
-        print r'\input{xyqcirc.tex}'
+        print('')
+        print(r'\documentclass[11pt]{article}')        # output latex header
+        print(r'\input{xyqcirc.tex}')
 
         # now go through all gates and output latex definitions
-        print ""
-        print "% definitions for the circuit elements\n"
+        print("")
+        print("% definitions for the circuit elements\n")
         for g in self.optab:
-            print g.latex()		# output \def\gXY{foo} lines
+            print(g.latex())		# output \def\gXY{foo} lines
 
         # now output defs for qubit labels and initial states
-        print ""
-        print "% definitions for bit labels and initial states\n"
+        print("")
+        print("% definitions for bit labels and initial states\n")
         for j in range(len(self.matrix)):
             qb = self.qubitnames[j]
-            print r"\def\b%s{%s}" % (num2name(j+1),self.qb2label(qb))
+            print(r"\def\b%s{%s}" % (num2name(j+1),self.qb2label(qb)))
 
         # now output circuit
-        print ""
+        print("")
         # print r'\xymatrix@R=15pt@C=12pt{'
-        print "% The quantum circuit as an xymatrix\n"
-        print r'\xymatrix@R=5pt@C=10pt{'
+        print("% The quantum circuit as an xymatrix\n")
+        print(r'\xymatrix@R=5pt@C=10pt{')
 
         ntime = len(self.circuit)+2	# total number of timsteps
         j = 0				# counter for timestep
         stab = []			# table of strings
         for y in self.matrix:		# loop over qubits
             qb = self.qubitnames[j]	# qubit name
-            ops = join(map(lambda(x):'\\'+x,y),' &')
-            stab.append(r'\b%s & %s' % (num2name(j+1),ops)) 
+            ops = ' &'.join(map(lambda x:'\\'+x,y))
+            stab.append(r'\b%s & %s' % (num2name(j+1),ops))
             j += 1			# increment timestep
         stab[0] = '    ' + stab[0]
-        print join(stab,'\n\\\\  ')
+        print( '\n\\\\  '.join(stab))
 
         # now go through all gates and output final latex (eg vertical lines)
-        print "%"
-        print "% Vertical lines and other post-xymatrix latex\n%"
+        print("%")
+        print("% vertical lines and other post-xymatrix latex\n%")
         for g in self.optab:
             if(g.endtex!=""):
-                print g.endtex		# output end latex commands
+                print(g.endtex)		# output end latex commands
 
         # now end the xymatrix & latex document
-        print r'}'
-        print ''
-        print r'\end{document}'
+        print(r'}')
+        print('')
+        print(r'\end{document}')
 
 #-----------------------------------------------------------------------------
 # master gate definition table (global definition)
@@ -672,7 +673,7 @@ GateMasterDef = {'cnot'     : ( 2 , 1 , '\o'        ),
                  'toffoli'  : ( 3 , 2 , r'\o'       ),
                  'Utwo'     : ( 2 , 0 , 'U'         )
                  }
-                
+
 #-----------------------------------------------------------------------------
 # main program
 
@@ -681,7 +682,7 @@ qc = qcircuit(qp.nametab,qp.typetab)	# initialize the circuit
 for g in qp.gatetab:			# add each gate to the circuit
     qc.add_op(g)
 
-print qp.comments.replace('#','%')	# output comments
+print(qp.comments.replace('#','%'))	# output comments
 qc.output_sequence()			# output time sequence of ops
 qc.output_matrix()			# output matrix of qubit/timesteps
 qc.output_latex()			# output latex code

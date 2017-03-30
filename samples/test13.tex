@@ -72,45 +72,45 @@
 
 % Qubit circuit matrix:
 %
-% j0: gAA, gBA, gCA, gDA, gEA, gFA, gGA, gHA, gIA, N  
-% j1: gAB, n  , gCB, gDB, gEB, n  , gGB, gHB, gIB, N  
-% j2: gAC, n  , n  , gDC, n  , gFC, gGC, gHC, gIC, N  
-% s0: n  , gBD, gCD, gDD, n  , n  , n  , n  , n  , n  
-% s1: n  , gBE, gCE, gDE, n  , n  , n  , n  , n  , n  
+% j0: gAxA, gBxA, gCxA, gDxA, gExA, gFxA, gGxA, gHxA, gIxA, N  
+% j1: gAxB, n  , gCxB, gDxB, gExB, n  , gGxB, gHxB, gIxB, N  
+% j2: gAxC, n  , n  , gDxC, n  , gFxC, gGxC, gHxC, gIxC, N  
+% s0: n  , gBxD, gCxD, gDxD, n  , n  , n  , n  , n  , n  
+% s1: n  , gBxE, gCxE, gDxE, n  , n  , n  , n  , n  , n  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
 
 % definitions for the circuit elements
 
-\def\gAA{\op{H}\w\A{gAA}}
-\def\gAB{\op{H}\w\A{gAB}}
-\def\gAC{\op{H}\w\A{gAC}}
-\def\gBD{\gnqubit{U^4}{d}\w\A{gBD}}
-\def\gBE{\gspace{U^4}\w\A{gBE}}
-\def\gBA{\b\w\A{gBA}}
-\def\gCD{\gnqubit{U^2}{d}\w\A{gCD}}
-\def\gCE{\gspace{U^2}\w\A{gCE}}
-\def\gCB{\b\w\A{gCB}}
-\def\gDD{\gnqubit{U}{d}\w\A{gDD}}
-\def\gDE{\gspace{U}\w\A{gDE}}
-\def\gDC{\b\w\A{gDC}}
-\def\gCA{\op{H}\w\A{gCA}}
-\def\gDA{\b\w\A{gDA}}
-\def\gDB{\op{S}\w\A{gDB}}
-\def\gEB{\op{H}\w\A{gEB}}
-\def\gEA{*-{}\w\A{gEA}}
-\def\gFA{\b\w\A{gFA}}
-\def\gFC{\op{T}\w\A{gFC}}
-\def\gGB{\b\w\A{gGB}}
-\def\gGC{\op{S}\w\A{gGC}}
-\def\gHC{\op{H}\w\A{gHC}}
-\def\gGA{*-{}\w\A{gGA}}
-\def\gHA{*-{}\w\A{gHA}}
-\def\gHB{*-{}\w\A{gHB}}
-\def\gIA{\meter\w\A{gIA}}
-\def\gIB{\meter\w\A{gIB}}
-\def\gIC{\meter\w\A{gIC}}
+\def\gAxA{\op{H}\w\A{gAxA}}
+\def\gAxB{\op{H}\w\A{gAxB}}
+\def\gAxC{\op{H}\w\A{gAxC}}
+\def\gBxD{\gnqubit{U^4}{d}\w\A{gBxD}}
+\def\gBxE{\gspace{U^4}\w\A{gBxE}}
+\def\gBxA{\b\w\A{gBxA}}
+\def\gCxD{\gnqubit{U^2}{d}\w\A{gCxD}}
+\def\gCxE{\gspace{U^2}\w\A{gCxE}}
+\def\gCxB{\b\w\A{gCxB}}
+\def\gDxD{\gnqubit{U}{d}\w\A{gDxD}}
+\def\gDxE{\gspace{U}\w\A{gDxE}}
+\def\gDxC{\b\w\A{gDxC}}
+\def\gCxA{\op{H}\w\A{gCxA}}
+\def\gDxA{\b\w\A{gDxA}}
+\def\gDxB{\op{S}\w\A{gDxB}}
+\def\gExB{\op{H}\w\A{gExB}}
+\def\gExA{*-{}\w\A{gExA}}
+\def\gFxA{\b\w\A{gFxA}}
+\def\gFxC{\op{T}\w\A{gFxC}}
+\def\gGxB{\b\w\A{gGxB}}
+\def\gGxC{\op{S}\w\A{gGxC}}
+\def\gHxC{\op{H}\w\A{gHxC}}
+\def\gGxA{*-{}\w\A{gGxA}}
+\def\gHxA{*-{}\w\A{gHxA}}
+\def\gHxB{*-{}\w\A{gHxB}}
+\def\gIxA{\meter\w\A{gIxA}}
+\def\gIxB{\meter\w\A{gIxB}}
+\def\gIxC{\meter\w\A{gIxC}}
 
 % definitions for bit labels and initial states
 
@@ -123,20 +123,20 @@
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAA &\gBA &\gCA &\gDA &\gEA &\gFA &\gGA &\gHA &\gIA &\N  
-\\  \bB & \gAB &\n   &\gCB &\gDB &\gEB &\n   &\gGB &\gHB &\gIB &\N  
-\\  \bC & \gAC &\n   &\n   &\gDC &\n   &\gFC &\gGC &\gHC &\gIC &\N  
-\\  \bD & \n   &\gBD &\gCD &\gDD &\n   &\n   &\n   &\n   &\n   &\n  
-\\  \bE & \n   &\gBE &\gCE &\gDE &\n   &\n   &\n   &\n   &\n   &\n  
+    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\gIxA &\N  
+\\  \bB & \gAxB &\n   &\gCxB &\gDxB &\gExB &\n   &\gGxB &\gHxB &\gIxB &\N  
+\\  \bC & \gAxC &\n   &\n   &\gDxC &\n   &\gFxC &\gGxC &\gHxC &\gIxC &\N  
+\\  \bD & \n   &\gBxD &\gCxD &\gDxD &\n   &\n   &\n   &\n   &\n   &\n  
+\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\n   &\n   &\n   &\n   &\n   &\n  
 %
-% Vertical lines and other post-xymatrix latex
+% vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBD";"gBA"
-\ar@{-}"gCD";"gCB"
-\ar@{-}"gDD";"gDC"
-\ar@{-}"gDB";"gDA"
-\ar@{-}"gFC";"gFA"
-\ar@{-}"gGC";"gGB"
+\ar@{-}"gBxD";"gBxA"
+\ar@{-}"gCxD";"gCxB"
+\ar@{-}"gDxD";"gDxC"
+\ar@{-}"gDxB";"gDxA"
+\ar@{-}"gFxC";"gFxA"
+\ar@{-}"gGxC";"gGxB"
 }
 
 \end{document}

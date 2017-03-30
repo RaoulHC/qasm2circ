@@ -21,20 +21,20 @@
 
 % Qubit circuit matrix:
 %
-% q0: gAA, gBA, gCA, n  
-% q1: gAB, gBB, gCB, n  
+% q0: gAxA, gBxA, gCxA, n  
+% q1: gAxB, gBxB, gCxB, n  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
 
 % definitions for the circuit elements
 
-\def\gAA{\b\w\A{gAA}}
-\def\gAB{\o\w\A{gAB}}
-\def\gBB{\b\w\A{gBB}}
-\def\gBA{\o\w\A{gBA}}
-\def\gCA{\b\w\A{gCA}}
-\def\gCB{\o\w\A{gCB}}
+\def\gAxA{\b\w\A{gAxA}}
+\def\gAxB{\o\w\A{gAxB}}
+\def\gBxB{\b\w\A{gBxB}}
+\def\gBxA{\o\w\A{gBxA}}
+\def\gCxA{\b\w\A{gCxA}}
+\def\gCxB{\o\w\A{gCxB}}
 
 % definitions for bit labels and initial states
 
@@ -44,14 +44,14 @@
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAA &\gBA &\gCA &\n  
-\\  \bB & \gAB &\gBB &\gCB &\n  
+    \bA & \gAxA &\gBxA &\gCxA &\n  
+\\  \bB & \gAxB &\gBxB &\gCxB &\n  
 %
-% Vertical lines and other post-xymatrix latex
+% vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gAB";"gAA"
-\ar@{-}"gBA";"gBB"
-\ar@{-}"gCB";"gCA"
+\ar@{-}"gAxB";"gAxA"
+\ar@{-}"gBxA";"gBxB"
+\ar@{-}"gCxB";"gCxA"
 }
 
 \end{document}

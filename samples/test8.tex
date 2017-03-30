@@ -42,29 +42,29 @@
 
 % Qubit circuit matrix:
 %
-% q0: n  , gBA, n  , gDA, gEA, gFA, gGA, gHA, n  
-% q1: gAB, gBB, gCB, gDB, gEB, n  , n  , n  , n  
-% q2: n  , n  , gCC, n  , gEC, gFC, n  , n  , n  
+% q0: n  , gBxA, n  , gDxA, gExA, gFxA, gGxA, gHxA, n  
+% q1: gAxB, gBxB, gCxB, gDxB, gExB, n  , n  , n  , n  
+% q2: n  , n  , gCxC, n  , gExC, gFxC, n  , n  , n  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
 
 % definitions for the circuit elements
 
-\def\gAB{\op{H}\w\A{gAB}}
-\def\gBA{\b\w\A{gBA}}
-\def\gBB{\o\w\A{gBB}}
-\def\gCB{\b\w\A{gCB}}
-\def\gCC{\o\w\A{gCC}}
-\def\gDA{\b\w\A{gDA}}
-\def\gDB{\o\w\A{gDB}}
-\def\gEB{\b\w\A{gEB}}
-\def\gEC{\o\w\A{gEC}}
-\def\gEA{\op{H}\w\A{gEA}}
-\def\gFC{\b\w\A{gFC}}
-\def\gFA{\op{Z}\w\A{gFA}}
-\def\gGA{\op{H}\w\A{gGA}}
-\def\gHA{\op{H}\w\A{gHA}}
+\def\gAxB{\op{H}\w\A{gAxB}}
+\def\gBxA{\b\w\A{gBxA}}
+\def\gBxB{\o\w\A{gBxB}}
+\def\gCxB{\b\w\A{gCxB}}
+\def\gCxC{\o\w\A{gCxC}}
+\def\gDxA{\b\w\A{gDxA}}
+\def\gDxB{\o\w\A{gDxB}}
+\def\gExB{\b\w\A{gExB}}
+\def\gExC{\o\w\A{gExC}}
+\def\gExA{\op{H}\w\A{gExA}}
+\def\gFxC{\b\w\A{gFxC}}
+\def\gFxA{\op{Z}\w\A{gFxA}}
+\def\gGxA{\op{H}\w\A{gGxA}}
+\def\gHxA{\op{H}\w\A{gHxA}}
 
 % definitions for bit labels and initial states
 
@@ -75,17 +75,17 @@
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \n   &\gBA &\n   &\gDA &\gEA &\gFA &\gGA &\gHA &\n  
-\\  \bB & \gAB &\gBB &\gCB &\gDB &\gEB &\n   &\n   &\n   &\n  
-\\  \bC & \n   &\n   &\gCC &\n   &\gEC &\gFC &\n   &\n   &\n  
+    \bA & \n   &\gBxA &\n   &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\n  
+\\  \bB & \gAxB &\gBxB &\gCxB &\gDxB &\gExB &\n   &\n   &\n   &\n  
+\\  \bC & \n   &\n   &\gCxC &\n   &\gExC &\gFxC &\n   &\n   &\n  
 %
-% Vertical lines and other post-xymatrix latex
+% vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBB";"gBA"
-\ar@{-}"gCC";"gCB"
-\ar@{-}"gDB";"gDA"
-\ar@{-}"gEC";"gEB"
-\ar@{-}"gFA";"gFC"
+\ar@{-}"gBxB";"gBxA"
+\ar@{-}"gCxC";"gCxB"
+\ar@{-}"gDxB";"gDxA"
+\ar@{-}"gExC";"gExB"
+\ar@{-}"gFxA";"gFxC"
 }
 
 \end{document}

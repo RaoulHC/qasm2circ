@@ -40,27 +40,27 @@
 
 % Qubit circuit matrix:
 %
-% j0: gAA, gBA, gCA, n  , n  , n  , gGA, n  
-% j1: n  , gBB, gCB, gDB, gEB, n  , n  , n  
-% j2: n  , n  , gCC, n  , gEC, gFC, gGC, n  
+% j0: gAxA, gBxA, gCxA, n  , n  , n  , gGxA, n  
+% j1: n  , gBxB, gCxB, gDxB, gExB, n  , n  , n  
+% j2: n  , n  , gCxC, n  , gExC, gFxC, gGxC, n  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
 
 % definitions for the circuit elements
 
-\def\gAA{\op{H}\w\A{gAA}}
-\def\gBB{\b\w\A{gBB}}
-\def\gBA{\op{S}\w\A{gBA}}
-\def\gCC{\b\w\A{gCC}}
-\def\gCA{\op{T}\w\A{gCA}}
-\def\gCB{*-{}\w\A{gCB}}
-\def\gDB{\op{H}\w\A{gDB}}
-\def\gEC{\b\w\A{gEC}}
-\def\gEB{\op{S}\w\A{gEB}}
-\def\gFC{\op{H}\w\A{gFC}}
-\def\gGA{\t\w\A{gGA}}
-\def\gGC{\t\w\A{gGC}}
+\def\gAxA{\op{H}\w\A{gAxA}}
+\def\gBxB{\b\w\A{gBxB}}
+\def\gBxA{\op{S}\w\A{gBxA}}
+\def\gCxC{\b\w\A{gCxC}}
+\def\gCxA{\op{T}\w\A{gCxA}}
+\def\gCxB{*-{}\w\A{gCxB}}
+\def\gDxB{\op{H}\w\A{gDxB}}
+\def\gExC{\b\w\A{gExC}}
+\def\gExB{\op{S}\w\A{gExB}}
+\def\gFxC{\op{H}\w\A{gFxC}}
+\def\gGxA{\t\w\A{gGxA}}
+\def\gGxC{\t\w\A{gGxC}}
 
 % definitions for bit labels and initial states
 
@@ -71,16 +71,16 @@
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAA &\gBA &\gCA &\n   &\n   &\n   &\gGA &\n  
-\\  \bB & \n   &\gBB &\gCB &\gDB &\gEB &\n   &\n   &\n  
-\\  \bC & \n   &\n   &\gCC &\n   &\gEC &\gFC &\gGC &\n  
+    \bA & \gAxA &\gBxA &\gCxA &\n   &\n   &\n   &\gGxA &\n  
+\\  \bB & \n   &\gBxB &\gCxB &\gDxB &\gExB &\n   &\n   &\n  
+\\  \bC & \n   &\n   &\gCxC &\n   &\gExC &\gFxC &\gGxC &\n  
 %
-% Vertical lines and other post-xymatrix latex
+% vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBA";"gBB"
-\ar@{-}"gCA";"gCC"
-\ar@{-}"gEB";"gEC"
-\ar@{-}"gGA";"gGC"
+\ar@{-}"gBxA";"gBxB"
+\ar@{-}"gCxA";"gCxC"
+\ar@{-}"gExB";"gExC"
+\ar@{-}"gGxA";"gGxC"
 }
 
 \end{document}

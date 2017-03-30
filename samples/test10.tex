@@ -25,21 +25,21 @@
 
 % Qubit circuit matrix:
 %
-% q0: gAA, gBA, n  , n  
-% c1: N  , gBB, gCB, N  
-% q2: gAC, n  , gCC, n  
+% q0: gAxA, gBxA, n  , n  
+% c1: N  , gBxB, gCxB, N  
+% q2: gAxC, n  , gCxC, n  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
 
 % definitions for the circuit elements
 
-\def\gAA{\op{H}\w\A{gAA}}
-\def\gBA{\gnqubit{U}{d}\w\A{gBA}}
-\def\gBB{\gspace{U}\W\A{gBB}}
-\def\gAC{\op{S}\w\A{gAC}}
-\def\gCB{\gnqubit{U}{d}\W\A{gCB}}
-\def\gCC{\gspace{U}\w\A{gCC}}
+\def\gAxA{\op{H}\w\A{gAxA}}
+\def\gBxA{\gnqubit{U}{d}\w\A{gBxA}}
+\def\gBxB{\gspace{U}\W\A{gBxB}}
+\def\gAxC{\op{S}\w\A{gAxC}}
+\def\gCxB{\gnqubit{U}{d}\W\A{gCxB}}
+\def\gCxC{\gspace{U}\w\A{gCxC}}
 
 % definitions for bit labels and initial states
 
@@ -50,11 +50,11 @@
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAA &\gBA &\n   &\n  
-\\  \bB & \N   &\gBB &\gCB &\N  
-\\  \bC & \gAC &\n   &\gCC &\n  
+    \bA & \gAxA &\gBxA &\n   &\n  
+\\  \bB & \N   &\gBxB &\gCxB &\N  
+\\  \bC & \gAxC &\n   &\gCxC &\n  
 %
-% Vertical lines and other post-xymatrix latex
+% vertical lines and other post-xymatrix latex
 %
 }
 
