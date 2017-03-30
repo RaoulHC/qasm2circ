@@ -1,4 +1,4 @@
-#1 qasm2circ
+# qasm2circ
 Fork of qasm2circ available [here]{https://www.media.mit.edu/quanta/qasm2circ/}
 Licensed under GNU General Public License
 
