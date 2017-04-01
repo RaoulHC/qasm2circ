@@ -14,8 +14,8 @@
 # are comments.  All other lines should be of the form <b>op<b>args
 # where <b> is whitespace, and op-args pairs are:
 #
-# qubit   name,initval
-# cbit    name,initval
+# qubit   name,initval,finalval
+# cbit    name,initval,finalval
 # measure qubit
 # H       qubit
 # X	  qubit
@@ -454,6 +454,7 @@ class qcircuit:		# quantum circuit class
     def __init__(self,bitnames,typetab):
 
         self.initval = {}	# qubit initial values
+        self.finalval = {}      # qubit final values
         self.is_cbit = {}	# flags to see if a bit is qubit or cbit
         self.setnames(bitnames,typetab)	# set names & types of qubits
         self.qbtab = {}		# initialize qubit table (assoc array)
@@ -470,14 +471,19 @@ class qcircuit:		# quantum circuit class
         self.circuit = []	# initialize table of circuit timesteps
         self.matrix = []	# initialize null circuit matrix
 
-    def setnames(self,names,types):	# set bit names and types (+ initval)
+    def setnames(self,names,types):	# set bit names and types
+                                        # (+ initval & finalval)
 
         def do_name(n,type):		# set names & extract initial values
             tmp = n.split(',')			# check for initial value
             self.qubitnames.append(tmp[0])	# add to name list
             self.is_cbit[tmp[0]] = type		# 0 = qubit, 1 = cbit
-            if(len(tmp)>1):
+            if(len(tmp)==2):
                 self.initval[tmp[0]] = tmp[1]	# add initial value for qubit
+            elif(len(tmp)>2):
+                if tmp[1]!='':
+                    self.initval[tmp[0]] = tmp[1]   # add initial value for qubit
+                self.finalval[tmp[0]] = tmp[2]  # add final value for qubit
 
         self.qubitnames = []
         for k in range(len(names)):		# loop over qubit names
@@ -514,8 +520,7 @@ class qcircuit:		# quantum circuit class
             print("%%  Time %02d:" % k)
             for g in timestep:		# loop over events in this timestep
                 op = self.optab[g]
-                print("%%    Gate %02d %s(%s)" % (op.id,
-                                                     op.name,op.args))
+                print("%%    Gate %02d %s(%s)" % (op.id, op.name,op.args))
             k += 1
         print("")
 
@@ -581,6 +586,25 @@ class qcircuit:		# quantum circuit class
                 label = r' \q{%s}' % (label)
         return(label)
 
+    def qbfinlabel(self,qb):    # make a latex format label for final val
+
+        m = re.compile('([A-z]+)(\d+)').search(qb)  # check if qb format is alpha+number
+        if(m):			# make num subscript if name = alpha+numbers
+            label = "%s_{%s}" % (m.group(1),m.group(2))
+        else:
+            label = qb			# othewise use just what was specified
+        if(self.is_cbit[qb]):           # check if cbit or qbit
+            if qb in self.finalval:	# qubit has final value?
+                label = r'   {%s}' % (self.finalval[qb])
+            else:
+                return('')
+        else:
+            if qb in self.finalval:	# qubit has final value?
+                label = r'\q{%s}' % (self.finalval[qb])
+            else:
+                return('')
+        return(label)
+
     def output_latex(self):	# output latex with xypic for circuit
 
         if(len(self.matrix)==0):	# make circuit matrix if not done
@@ -596,12 +620,15 @@ class qcircuit:		# quantum circuit class
         for g in self.optab:
             print(g.latex())		# output \def\gXY{foo} lines
 
-        # now output defs for qubit labels and initial states
+        # now output defs for qubit labels, initial states and final states
         print("")
         print("% definitions for bit labels and initial states\n")
         for j in range(len(self.matrix)):
             qb = self.qubitnames[j]
             print(r"\def\b%s{%s}" % (num2name(j+1),self.qb2label(qb)))
+        for j in range(len(self.matrix)):
+            qb = self.qubitnames[j]
+            print(r"\def\f%s{%s}" % (num2name(j+1),self.qbfinlabel(qb)))
 
         # now output circuit
         print("")
@@ -615,7 +642,7 @@ class qcircuit:		# quantum circuit class
         for y in self.matrix:		# loop over qubits
             qb = self.qubitnames[j]	# qubit name
             ops = ' &'.join(map(lambda x:'\\'+x,y))
-            stab.append(r'\b%s & %s' % (num2name(j+1),ops))
+            stab.append(r'\b%s & %s & \f%s' % (num2name(j+1),ops,num2name(j+1)))
             j += 1			# increment timestep
         stab[0] = '    ' + stab[0]
         print( '\n\\\\  '.join(stab))
