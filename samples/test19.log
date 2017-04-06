@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=latex 2017.2.15)  1 APR 2017 18:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=latex 2017.2.15)  6 APR 2017 11:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**test19
-(./test19.tex
+**samples/test19
+(./samples/test19.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
@@ -135,7 +135,7 @@ Package: xy 2013/10/06 Xy-pic version 3.8.9
 
 
 Writing index file test19.idx
-(./test19.aux)
+(samples/test19.aux)
 \openout1 = `test19.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
@@ -160,14 +160,14 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 49.
  5x2 296> [1
 
-] (./test19.aux) ) 
+] (samples/test19.aux) ) 
 Here is how much of TeX's memory you used:
- 2110 strings out of 493014
- 23600 string characters out of 6139343
+ 2112 strings out of 493014
+ 23673 string characters out of 6139343
  99622 words of memory out of 5000000
- 5671 multiletter control sequences out of 15000+600000
+ 5672 multiletter control sequences out of 15000+600000
  7828 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,10n,26p,199b,305s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,26p,207b,373s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on test19.dvi (1 page, 784 bytes).
+Output written on samples/test19.dvi (1 page, 680 bytes).

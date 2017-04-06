@@ -54,18 +54,22 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{ \q{j_{0}}}
-\def\bB{ \q{j_{1}}}
-\def\bC{ \q{j_{2}}}
-\def\bD{ \q{j_{3}}}
+\def\bA{\qrule }
+\def\bB{\qrule }
+\def\bC{\qrule }
+\def\bD{\qrule }
+\def\fA{\qrule}
+\def\fB{\qrule}
+\def\fC{\qrule}
+\def\fD{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAxA &\gBxA &\gCxA &\n   &\n  
-\\  \bB & \gAxB &\n   &\gCxB &\n   &\n  
-\\  \bC & \gAxC &\n   &\gCxC &\gDxC &\n  
-\\  \bD & \n   &\n   &\gCxD &\gDxD &\N  
+    \bA & \gAxA &\gBxA &\gCxA &\n   &\n   & \fA
+\\  \bB & \gAxB &\n   &\gCxB &\n   &\n   & \fB
+\\  \bC & \gAxC &\n   &\gCxC &\gDxC &\n   & \fC
+\\  \bD & \n   &\n   &\gCxD &\gDxD &\N   & \fD
 %
 % vertical lines and other post-xymatrix latex
 %

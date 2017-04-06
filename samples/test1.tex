@@ -32,14 +32,16 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{ \q{q_{0}}}
-\def\bB{ \q{q_{1}}}
+\def\bA{\qrule }
+\def\bB{\qrule }
+\def\fA{\qrule}
+\def\fB{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAxA &\gBxA &\n  
-\\  \bB & \n   &\gBxB &\n  
+    \bA & \gAxA &\gBxA &\n   & \fA
+\\  \bB & \n   &\gBxB &\n   & \fB
 %
 % vertical lines and other post-xymatrix latex
 %

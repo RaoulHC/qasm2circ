@@ -1,13 +1,15 @@
-This is TeX, Version 3.14159 (Web2C 7.3.7) (format=latex 2003.4.23)  25 MAR 2004 10:28
-**test10
-(./test10.tex
-LaTeX2e <2001/06/01>
-Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, n
-ohyphenation, loaded.
-(/usr/share/texmf/tex/latex/base/article.cls
-Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
-(/usr/share/texmf/tex/latex/base/size11.clo
-File: size11.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=latex 2017.2.15)  6 APR 2017 11:54
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**samples/test10
+(./samples/test10.tex
+LaTeX2e <2016/03/31> patch level 3
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(/usr/share/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/share/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
 \c@section=\count80
@@ -21,37 +23,37 @@ File: size11.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 ) (./xyqcirc.tex
-(/usr/share/texmf/tex/latex/graphics/graphicx.sty
-Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+(/usr/share/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf/tex/latex/graphics/keyval.sty
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+(/usr/share/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
-(/usr/share/texmf/tex/latex/graphics/graphics.sty
-Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+(/usr/share/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texmf/tex/latex/graphics/trig.sty
-Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+(/usr/share/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(/usr/share/texmf/tex/latex/config/graphics.cfg
-File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+(/usr/share/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
-Package graphics Info: Driver file: dvips.def on input line 80.
+Package graphics Info: Driver file: dvips.def on input line 99.
 
-(/usr/share/texmf/tex/latex/graphics/dvips.def
-File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+(/usr/share/texmf-dist/tex/latex/graphics-def/dvips.def
+File: dvips.def 2016/07/10 v3.1a Driver-dependent file (DPC,SPQR)
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
 )
-(/usr/share/texmf/tex/generic/xypic/xy.sty
-(/usr/share/texmf/tex/generic/xypic/xy.tex Bootstrap'ing: catcodes, docmode,
-(/usr/share/texmf/tex/generic/xypic/xyrecat.tex)
-(/usr/share/texmf/tex/generic/xypic/xyidioms.tex)
+(/usr/share/texmf-dist/tex/generic/xypic/xy.sty
+(/usr/share/texmf-dist/tex/generic/xypic/xy.tex Bootstrap'ing: catcodes,
+docmode, (/usr/share/texmf-dist/tex/generic/xypic/xyrecat.tex)
+(/usr/share/texmf-dist/tex/generic/xypic/xyidioms.tex)
 
- Xy-pic version 3.7 <1999/02/16>
- Copyright (c) 1991-1998 by Kristoffer H. Rose <krisrose@ens-lyon.fr>
+ Xy-pic version 3.8.9 <2013/10/06>
+ Copyright (c) 1991-2013 by Kristoffer H. Rose <krisrose@tug.org> and others
  Xy-pic is free software: see the User's Guide for details.
 
 Loading kernel: messages; fonts; allocations: state,
@@ -103,18 +105,21 @@ utility macros; pictures: \xy, positions,
  decorations;
 kernel objects: directionals, circles, text; options; algorithms: directions,
 edges, connections;  Xy-pic loaded)
-Package: xy 1999/02/16 Xy-pic version 3.7
+(/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2016/05/14 v3.1 Provides the ifpdf switch
+)
+Package: xy 2013/10/06 Xy-pic version 3.8.9
 
-(/usr/share/texmf/tex/generic/xypic/xyframe.tex
- Xy-pic option: Frame and Bracket extension v.3.7 loaded)
-(/usr/share/texmf/tex/generic/xypic/xyline.tex
- Xy-pic option: Line styles extension v.3.6
+(/usr/share/texmf-dist/tex/generic/xypic/xyframe.tex
+ Xy-pic option: Frame and Bracket extension v.3.14 loaded)
+(/usr/share/texmf-dist/tex/generic/xypic/xyline.tex
+ Xy-pic option: Line styles extension v.3.10
 \xylinethick@=\dimen133
  loaded)
-(/usr/share/texmf/tex/generic/xypic/xyarrow.tex
- Xy-pic option: Arrow and Path feature v.3.5 path, \ar, loaded)
-(/usr/share/texmf/tex/generic/xypic/xymatrix.tex
- Xy-pic option: Matrix feature v.3.4
+(/usr/share/texmf-dist/tex/generic/xypic/xyarrow.tex
+ Xy-pic option: Arrow and Path feature v.3.9 path, \ar, loaded)
+(/usr/share/texmf-dist/tex/generic/xypic/xymatrix.tex
+ Xy-pic option: Matrix feature v.3.14
 \Row=\count91
 \Col=\count92
 \queue@=\toks19
@@ -123,14 +128,14 @@ Package: xy 1999/02/16 Xy-pic version 3.7
 \qcount@@=\count94
 \matrixsize@=\count95
  loaded)
-(/usr/share/texmf/tex/generic/xypic/xytips.tex
- Xy-pic option: More Tips extension v.3.3 loaded))
+(/usr/share/texmf-dist/tex/generic/xypic/xytips.tex
+ Xy-pic option: More Tips extension v.3.11 loaded))
 \@indexfile=\write4
 \openout4 = `test10.idx'.
 
 
 Writing index file test10.idx
-(./test10.aux)
+(samples/test10.aux)
 \openout1 = `test10.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
@@ -148,21 +153,21 @@ LaTeX Font Info:    ... okay on input line 80.
 \sbox=\box29
 ) <xymatrix
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 59.
+(Font)              <10.95> on input line 62.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 59.
+(Font)              <8> on input line 62.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 59.
- 5x3 544> [1
+(Font)              <6> on input line 62.
+ 6x3 556> [1
 
-] (./test10.aux) ) 
+] (samples/test10.aux) ) 
 Here is how much of TeX's memory you used:
- 2080 strings out of 10847
- 22739 string characters out of 70946
- 94243 words of memory out of 263001
- 5035 multiletter control sequences out of 10000+0
- 7522 words of font info for 30 fonts, out of 400000 for 1000
- 14 hyphenation exceptions out of 1000
- 27i,12n,26p,199b,362s stack positions out of 300i,100n,500p,50000b,4000s
+ 2132 strings out of 493014
+ 23771 string characters out of 6139343
+ 104083 words of memory out of 5000000
+ 5692 multiletter control sequences out of 15000+600000
+ 7828 words of font info for 32 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 27i,12n,26p,207b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on test10.dvi (1 page, 1652 bytes).
+Output written on samples/test10.dvi (1 page, 1252 bytes).

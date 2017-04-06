@@ -8,10 +8,10 @@
 	def	MeasH,0,'\dmeter{H}'
 	def	Z4,3,'bullet'	# handled specially
 
-	qubit	q0,\psi
-	qubit	q1,+
-	qubit	q2,+
-	qubit	q3,\phi
+	qubit	q0;\psi
+	qubit	q1;+
+	qubit	q2;+
+	qubit	q3;\phi
 
 	nop	q0
 	nop	q2

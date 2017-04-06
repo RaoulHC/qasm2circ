@@ -12,9 +12,9 @@
 	def	c-S,1,'S'
 	def	c-T,1,'T'
 
-	qubit	j0,0	# QFT qubits
-	qubit	j1,0
-	qubit	j2,0
+	qubit	j0;0	# QFT qubits
+	qubit	j1;0
+	qubit	j2;0
 	qubit	s0	# U qubits
 	qubit	s1
 

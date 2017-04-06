@@ -6,10 +6,10 @@
 # Sample qasm input file - example from Nielsen
 # paper on cluster states
 
-	qubit	q0,\psi
-	qubit	q1,\psi
-	qubit	q2,\phi
-	qubit	q3,0
+	qubit	q0;\psi
+	qubit	q1;\psi
+	qubit	q2;\phi
+	qubit	q3;0
 
 	nop	q0
 	nop	q0

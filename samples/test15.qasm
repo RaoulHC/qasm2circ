@@ -8,8 +8,8 @@
 
 	def	MeasZ,0,'\dmeterwide{HZ_\theta}{18pt}'
 
-	qubit	q0,\psi
-	qubit	q1,+
+	qubit	q0;\psi
+	qubit	q1;+
 
 	nop	q0
 	ZZ	q0,q1

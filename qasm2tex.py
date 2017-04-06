@@ -475,15 +475,17 @@ class qcircuit:		# quantum circuit class
                                         # (+ initval & finalval)
 
         def do_name(n,type):		# set names & extract initial values
-            tmp = n.split(',')			# check for initial value
+            tmp = n.split(';')			# check for initial value
             self.qubitnames.append(tmp[0])	# add to name list
             self.is_cbit[tmp[0]] = type		# 0 = qubit, 1 = cbit
             if(len(tmp)==2):
-                self.initval[tmp[0]] = tmp[1]	# add initial value for qubit
+                if(tmp[1]!=''):                 # add initial value for qubit
+                    self.initval[tmp[0]] = tmp[1].split(',')
             elif(len(tmp)>2):
-                if tmp[1]!='':
-                    self.initval[tmp[0]] = tmp[1]   # add initial value for qubit
-                self.finalval[tmp[0]] = tmp[2]  # add final value for qubit
+                if(tmp[1]!=''):                 # add initial value
+                    self.initval[tmp[0]] = tmp[1].split(',')
+                if(tmp[2]!=''):                 # add final value
+                    self.finalval[tmp[0]] = tmp[2].split(',')
 
         self.qubitnames = []
         for k in range(len(names)):		# loop over qubit names
@@ -567,42 +569,25 @@ class qcircuit:		# quantum circuit class
                 if((g.name!='space')&(g.name!='discard')):
                     self.matrix[-1].append('%s  ' % wires[cbit])
 
-    def qb2label(self,qb):	# make latex format label for qubit name
-
-        m = re.compile('([A-z]+)(\d+)').search(qb)
-        if(m):			# make num subscript if name = alpha+numbers
-            label = "%s_{%s}" % (m.group(1),m.group(2))
+    def qb2label(self,qb,fin):
+        # make latex format label for qubit name
+        if fin:                # init or fin values
+            vals = self.finalval
         else:
-            label = qb			# othewise use just what was specified
-        if(self.is_cbit[qb]):
-            if qb in self.initval:	# qubit has initial value?
-                label = r'   {%s = %s}' % (label,self.initval[qb])
-            else:
-                label = r'   {%s}' % (label)
+            vals = self.initval
+        if qb in vals:	# qubit has init/fin value?
+            labels = []
+            for val in vals[qb]:
+                m = re.compile('([A-z]+)(\d+)').search(val)
+                if(m):			# make num subscript if name = alpha+numbers
+                    labels += ["%s_{%s}" % (m.group(1),m.group(2))]
+                else:
+                    labels += [val]
+            if not self.is_cbit[qb]:    # Change label to \q if qubit
+                labels = [r'\q{%s}' % (val) for val in labels]
+            label = '='.join(labels)
         else:
-            if qb in self.initval:	# qubit has initial value?
-                label = r'\qv{%s}{%s}' % (label,self.initval[qb])
-            else:
-                label = r' \q{%s}' % (label)
-        return(label)
-
-    def qbfinlabel(self,qb):    # make a latex format label for final val
-
-        m = re.compile('([A-z]+)(\d+)').search(qb)  # check if qb format is alpha+number
-        if(m):			# make num subscript if name = alpha+numbers
-            label = "%s_{%s}" % (m.group(1),m.group(2))
-        else:
-            label = qb			# othewise use just what was specified
-        if(self.is_cbit[qb]):           # check if cbit or qbit
-            if qb in self.finalval:	# qubit has final value?
-                label = r'   {%s}' % (self.finalval[qb])
-            else:
-                return('')
-        else:
-            if qb in self.finalval:	# qubit has final value?
-                label = r'\q{%s}' % (self.finalval[qb])
-            else:
-                return('')
+            label = ''
         return(label)
 
     def output_latex(self):	# output latex with xypic for circuit
@@ -625,10 +610,10 @@ class qcircuit:		# quantum circuit class
         print("% definitions for bit labels and initial states\n")
         for j in range(len(self.matrix)):
             qb = self.qubitnames[j]
-            print(r"\def\b%s{%s}" % (num2name(j+1),self.qb2label(qb)))
+            print(r"\def\b%s{\qrule %s}" % (num2name(j+1),self.qb2label(qb,0)))
         for j in range(len(self.matrix)):
             qb = self.qubitnames[j]
-            print(r"\def\f%s{%s}" % (num2name(j+1),self.qbfinlabel(qb)))
+            print(r"\def\f%s{\qrule%s}" % (num2name(j+1),self.qb2label(qb,1)))
 
         # now output circuit
         print("")

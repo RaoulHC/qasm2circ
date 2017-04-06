@@ -6,10 +6,10 @@
 % Sample qasm input file - example from Nielsen
 % paper on cluster states
 % 
-% 	qubit	q0,\psi
-% 	qubit	q1,\psi
-% 	qubit	q2,\phi
-% 	qubit	q3,0
+% 	qubit	q0;\psi
+% 	qubit	q1;\psi
+% 	qubit	q2;\phi
+% 	qubit	q3;0
 % 
 % 	nop	q0
 % 	nop	q0
@@ -62,18 +62,22 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{\qv{q_{0}}{\psi}}
-\def\bB{\qv{q_{1}}{\psi}}
-\def\bC{\qv{q_{2}}{\phi}}
-\def\bD{\qv{q_{3}}{0}}
+\def\bA{\qrule \q{\psi}}
+\def\bB{\qrule \q{\psi}}
+\def\bC{\qrule \q{\phi}}
+\def\bD{\qrule \q{0}}
+\def\fA{\qrule}
+\def\fB{\qrule}
+\def\fC{\qrule}
+\def\fD{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAxA &\gBxA &\gCxA &\n   &\n   &\n  
-\\  \bB & \gAxB &\gBxB &\n   &\n   &\n   &\n  
-\\  \bC & \n   &\gBxC &\gCxC &\gDxC &\gExC
-\\  \bD & \n   &\n   &\gCxD &\gDxD &\N   &\N  
+    \bA & \gAxA &\gBxA &\gCxA &\n   &\n   &\n   & \fA
+\\  \bB & \gAxB &\gBxB &\n   &\n   &\n   &\n   & \fB
+\\  \bC & \n   &\gBxC &\gCxC &\gDxC &\gExC & \fC
+\\  \bD & \n   &\n   &\gCxD &\gDxD &\N   &\N   & \fD
 %
 % vertical lines and other post-xymatrix latex
 %

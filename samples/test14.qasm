@@ -12,10 +12,10 @@
 	qubit	q0	# code data qubits
 	qubit	q1
 	qubit	q2
-	qubit	s0,0	# syndrome measurement qubits
-	qubit	s1,0
-	cbit	c0,0	# classical bits to store syndromes
-	cbit	c1,0
+	qubit	s0;0	# syndrome measurement qubits
+	qubit	s1;0
+	cbit	c0;0	# classical bits to store syndromes
+	cbit	c1;0
 
 	h	s0	# create EPR pair for FT meas
 	cnot	s0,s1

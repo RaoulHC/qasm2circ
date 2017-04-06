@@ -8,9 +8,9 @@
 % 
 % 	def	c-Z,1,'Z'
 % 
-% 	qubit	q0,\psi
-% 	qubit	q1,0
-% 	qubit	q2,0
+% 	qubit	q0;\psi
+% 	qubit	q1;0
+% 	qubit	q2;0
 % 
 % 	H	q1
 % 	cnot	q0,q1
@@ -68,16 +68,19 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{\qv{q_{0}}{\psi}}
-\def\bB{\qv{q_{1}}{0}}
-\def\bC{\qv{q_{2}}{0}}
+\def\bA{\qrule \q{\psi}}
+\def\bB{\qrule \q{0}}
+\def\bC{\qrule \q{0}}
+\def\fA{\qrule}
+\def\fB{\qrule}
+\def\fC{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \n   &\gBxA &\n   &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\n  
-\\  \bB & \gAxB &\gBxB &\gCxB &\gDxB &\gExB &\n   &\n   &\n   &\n  
-\\  \bC & \n   &\n   &\gCxC &\n   &\gExC &\gFxC &\n   &\n   &\n  
+    \bA & \n   &\gBxA &\n   &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\n   & \fA
+\\  \bB & \gAxB &\gBxB &\gCxB &\gDxB &\gExB &\n   &\n   &\n   &\n   & \fB
+\\  \bC & \n   &\n   &\gCxC &\n   &\gExC &\gFxC &\n   &\n   &\n   & \fC
 %
 % vertical lines and other post-xymatrix latex
 %

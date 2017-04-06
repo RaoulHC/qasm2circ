@@ -12,10 +12,10 @@
 % 	qubit	q0	% code data qubits
 % 	qubit	q1
 % 	qubit	q2
-% 	qubit	s0,0	% syndrome measurement qubits
-% 	qubit	s1,0
-% 	cbit	c0,0	% classical bits to store syndromes
-% 	cbit	c1,0
+% 	qubit	s0;0	% syndrome measurement qubits
+% 	qubit	s1;0
+% 	cbit	c0;0	% classical bits to store syndromes
+% 	cbit	c1;0
 % 
 % 	h	s0	% create EPR pair for FT meas
 % 	cnot	s0,s1
@@ -161,24 +161,31 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{ \q{q_{0}}}
-\def\bB{ \q{q_{1}}}
-\def\bC{ \q{q_{2}}}
-\def\bD{\qv{s_{0}}{0}}
-\def\bE{\qv{s_{1}}{0}}
-\def\bF{   {c_{0} = 0}}
-\def\bG{   {c_{1} = 0}}
+\def\bA{\qrule }
+\def\bB{\qrule }
+\def\bC{\qrule }
+\def\bD{\qrule \q{0}}
+\def\bE{\qrule \q{0}}
+\def\bF{\qrule 0}
+\def\bG{\qrule 0}
+\def\fA{\qrule}
+\def\fB{\qrule}
+\def\fC{\qrule}
+\def\fD{\qrule}
+\def\fE{\qrule}
+\def\fF{\qrule}
+\def\fG{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \n   &\n   &\gCxA &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gSxA &\n  
-\\  \bB & \n   &\n   &\n   &\gDxB &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gMxB &\n   &\n   &\n   &\n   &\n   &\gSxB &\n  
-\\  \bC & \n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gNxC &\n   &\n   &\n   &\n   &\gSxC &\n  
-\\  \bD & \gAxD &\gBxD &\gCxD &\n   &\gExD &\gFxD &\gGxD &\gHxD &\gIxD &\gJxD &\gKxD &\gLxD &\gMxD &\n   &\gOxD &\gPxD &\gQxD &\gRxD &\gSxD &\N  
-\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\gExE &\gFxE &\gGxE &\gHxE &\gIxE &\gJxE &\n   &\gLxE &\gMxE &\gNxE &\gOxE &\gPxE &\gQxE &\gRxE &\gSxE &\N  
-\\  \bF & \N   &\N   &\N   &\N   &\N   &\N   &\N   &\gHxF &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gRxF &\gSxF &\N  
-\\  \bG & \N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gIxG &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gRxG &\gSxG &\N  
+    \bA & \n   &\n   &\gCxA &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gSxA &\n   & \fA
+\\  \bB & \n   &\n   &\n   &\gDxB &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gMxB &\n   &\n   &\n   &\n   &\n   &\gSxB &\n   & \fB
+\\  \bC & \n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gNxC &\n   &\n   &\n   &\n   &\gSxC &\n   & \fC
+\\  \bD & \gAxD &\gBxD &\gCxD &\n   &\gExD &\gFxD &\gGxD &\gHxD &\gIxD &\gJxD &\gKxD &\gLxD &\gMxD &\n   &\gOxD &\gPxD &\gQxD &\gRxD &\gSxD &\N   & \fD
+\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\gExE &\gFxE &\gGxE &\gHxE &\gIxE &\gJxE &\n   &\gLxE &\gMxE &\gNxE &\gOxE &\gPxE &\gQxE &\gRxE &\gSxE &\N   & \fE
+\\  \bF & \N   &\N   &\N   &\N   &\N   &\N   &\N   &\gHxF &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gRxF &\gSxF &\N   & \fF
+\\  \bG & \N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gIxG &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gRxG &\gSxG &\N   & \fG
 %
 % vertical lines and other post-xymatrix latex
 %

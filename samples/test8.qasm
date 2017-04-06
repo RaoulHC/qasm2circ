@@ -8,9 +8,9 @@
 
 	def	c-Z,1,'Z'
 
-	qubit	q0,\psi
-	qubit	q1,0
-	qubit	q2,0
+	qubit	q0;\psi
+	qubit	q1;0
+	qubit	q2;0
 
 	H	q1
 	cnot	q0,q1

@@ -8,8 +8,8 @@
 % 
 % 	def	MeasZ,0,'\dmeterwide{HZ_\theta}{18pt}'
 % 
-% 	qubit	q0,\psi
-% 	qubit	q1,+
+% 	qubit	q0;\psi
+% 	qubit	q1;+
 % 
 % 	nop	q0
 % 	ZZ	q0,q1
@@ -43,14 +43,16 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{\qv{q_{0}}{\psi}}
-\def\bB{\qv{q_{1}}{+}}
+\def\bA{\qrule \q{\psi}}
+\def\bB{\qrule \q{+}}
+\def\fA{\qrule}
+\def\fB{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\N  
-\\  \bB & \n   &\gBxB &\n   &\n   &\n  
+    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\N   & \fA
+\\  \bB & \n   &\gBxB &\n   &\n   &\n   & \fB
 %
 % vertical lines and other post-xymatrix latex
 %

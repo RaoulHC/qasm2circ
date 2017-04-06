@@ -12,9 +12,9 @@
 % 	def	c-S,1,'S'
 % 	def	c-T,1,'T'
 % 
-% 	qubit	j0,0	% QFT qubits
-% 	qubit	j1,0
-% 	qubit	j2,0
+% 	qubit	j0;0	% QFT qubits
+% 	qubit	j1;0
+% 	qubit	j2;0
 % 	qubit	s0	% U qubits
 % 	qubit	s1
 % 
@@ -114,20 +114,25 @@
 
 % definitions for bit labels and initial states
 
-\def\bA{\qv{j_{0}}{0}}
-\def\bB{\qv{j_{1}}{0}}
-\def\bC{\qv{j_{2}}{0}}
-\def\bD{ \q{s_{0}}}
-\def\bE{ \q{s_{1}}}
+\def\bA{\qrule \q{0}}
+\def\bB{\qrule \q{0}}
+\def\bC{\qrule \q{0}}
+\def\bD{\qrule }
+\def\bE{\qrule }
+\def\fA{\qrule}
+\def\fB{\qrule}
+\def\fC{\qrule}
+\def\fD{\qrule}
+\def\fE{\qrule}
 
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\gIxA &\N  
-\\  \bB & \gAxB &\n   &\gCxB &\gDxB &\gExB &\n   &\gGxB &\gHxB &\gIxB &\N  
-\\  \bC & \gAxC &\n   &\n   &\gDxC &\n   &\gFxC &\gGxC &\gHxC &\gIxC &\N  
-\\  \bD & \n   &\gBxD &\gCxD &\gDxD &\n   &\n   &\n   &\n   &\n   &\n  
-\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\n   &\n   &\n   &\n   &\n   &\n  
+    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\gIxA &\N   & \fA
+\\  \bB & \gAxB &\n   &\gCxB &\gDxB &\gExB &\n   &\gGxB &\gHxB &\gIxB &\N   & \fB
+\\  \bC & \gAxC &\n   &\n   &\gDxC &\n   &\gFxC &\gGxC &\gHxC &\gIxC &\N   & \fC
+\\  \bD & \n   &\gBxD &\gCxD &\gDxD &\n   &\n   &\n   &\n   &\n   &\n   & \fD
+\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\n   &\n   &\n   &\n   &\n   &\n   & \fE
 %
 % vertical lines and other post-xymatrix latex
 %
