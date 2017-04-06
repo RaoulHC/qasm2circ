@@ -26,7 +26,7 @@
 % Qubit circuit matrix:
 %
 % q0: gAxA, gBxA, n  , n  
-% c1: N  , gBxB, gCxB, N  
+% c1: l  , gBxB, gCxB, l  
 % q2: gAxC, n  , gCxC, n  
 
 \documentclass[11pt]{article}
@@ -36,9 +36,9 @@
 
 \def\gAxA{\op{H}\w\A{gAxA}}
 \def\gBxA{\gnqubit{U}{d}\w\A{gBxA}}
-\def\gBxB{\gspace{U}\W\A{gBxB}}
+\def\gBxB{\gspace{U}\c\A{gBxB}}
 \def\gAxC{\op{S}\w\A{gAxC}}
-\def\gCxB{\gnqubit{U}{d}\W\A{gCxB}}
+\def\gCxB{\gnqubit{U}{d}\c\A{gCxB}}
 \def\gCxC{\gspace{U}\w\A{gCxC}}
 
 % definitions for bit labels and initial states
@@ -54,7 +54,7 @@
 
 \xymatrix@R=5pt@C=10pt{
     \bA & \gAxA &\gBxA &\n   &\n   & \fA
-\\  \bB & \N   &\gBxB &\gCxB &\N   & \fB
+\\  \bB & \l   &\gBxB &\gCxB &\l   & \fB
 \\  \bC & \gAxC &\n   &\gCxC &\n   & \fC
 %
 % vertical lines and other post-xymatrix latex

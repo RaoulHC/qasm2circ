@@ -14,8 +14,9 @@
 # are comments.  All other lines should be of the form <b>op<b>args
 # where <b> is whitespace, and op-args pairs are:
 #
-# qubit   name,initval,finalval
-# cbit    name,initval,finalval
+# qubit   name;initvals;finalvals
+# mqubit  name;initvals;finalvals
+# cbit    name;initvals;finalvals
 # measure qubit
 # H       qubit
 # X	  qubit
@@ -234,7 +235,7 @@ class qgate:		# quantum gate class
             s = (self.linenum, self.name + " " + self.args)
             do_error("[qgate] OOPS! line %d duplicate bit operands in %s" % s)
 
-    def set_bittype(self,qb,cbit):	# set qubit type (cbit/qbit)
+    def set_bittype(self,qb,cbit):	# set qubit type (cbit/qbit/mqbit)
         self.wiretype[qb] = cbit
 
     def make_id(self,qb2idx):		# make gate ID's, eg gAB
@@ -252,16 +253,18 @@ class qgate:		# quantum gate class
 
         def defid(k,op):		# latex def for given gate & qubit
             myid = self.xy[self.qubits[k]]
-            wires = ['\w','\W']		# \w = single, \W = double wire
+            wires = ['\w','\c','\W', '\C']	# [single,double,bold,bold double]
             mywire = wires[self.wiretype[self.qubits[k]]]
             return('\def\%s{%s%s\A{%s}}' % (myid,op,mywire,myid))
 
         def get_wiretype(qubits):	# figure out wire type for verticals
             # if any control is classical (double-wire) then all should be
-            if(sum([ self.wiretype[x] for x in qubits])>0):
-                wt = '='		# wire type = cbit
+            # if(sum([ self.wiretype[x] for x in qubits])>0):
+            are_cbit = [(self.wiretype[x]==1 or self.wiretype[x]==3) for x in qubits]
+            if any(are_cbit):
+                wt = r'\lv'		# wire type = cbit
             else:
-                wt = '-'		# wire type = qubit
+                wt = r'\nv'		# wire type = qubit
             return(wt)
 
         def do_multiqubit(nbits,nctrl,u):	# multiple-qubit operation
@@ -279,7 +282,7 @@ class qgate:		# quantum gate class
 
             myid = self.xy[qb]		# top qubit gets \gnqubit{u}{ddd...}
             dstr = 'd'*(nbits-nctrl-1)
-            wires = ['\w','\W']		# \w = single, \W = double wire
+            wires = ['\w','\c','\W','\C']   # \w = single, \W = double wire
             w = wires[self.wiretype[qb]]
             s.append(r'\def\%s{\gnqubit{%s}{%s}%s\A{%s}}'%(myid,u,dstr,w,myid))
             firstqb = qb
@@ -302,9 +305,9 @@ class qgate:		# quantum gate class
                 # endtex = latex commands which appear after xymatrix body
                 # such as the vertical wires
                 if self.yloc[qb] < ytop:
-                    self.endtex += r'\ar@{%c}"%s";"%s"' %(wt,xytop,self.xy[qb])
+                    self.endtex += r'%s{%s}{%s}' % (wt,xytop,self.xy[qb])
                 else:
-                    self.endtex += r'\ar@{%c}"%s";"%s"' %(wt,xybot,self.xy[qb])
+                    self.endtex += r'%s{%s}{%s}' %(wt,xybot,self.xy[qb])
 
             # done with multi-qubit op
             return( '\n'.join(s))		# return with latex def's
@@ -322,7 +325,7 @@ class qgate:		# quantum gate class
             for qb in self.qubits[0:-1]: # loop over all ctrl-target pairs
                 # endtex = latex commands which appear after xymatrix body
                 # such as the vertical wires
-                self.endtex += r'\ar@{%c}"%s";"%s"' % (wt,qbtarget,self.xy[qb])
+                self.endtex += r'%s{%s}{%s}' % (wt,qbtarget,self.xy[qb])
 
             return(s)
 
@@ -340,7 +343,7 @@ class qgate:		# quantum gate class
             wt = get_wiretype(self.qubits)
             qb0 = self.xy[self.qubits[0]]
             qb1 = self.xy[self.qubits[1]]
-            self.endtex += r'\ar@{%c}"%s";"%s"' % (wt,qb0,qb1)
+            self.endtex += r'%s{%s}{%s}' % (wt,qb0,qb1)
             return(defid(0,texsym) + '\n' + defid(1,texsym))
 
         # main routine to generate latex
@@ -374,10 +377,21 @@ class qasm_parser:	# parser for qasm; inputs lines, returns
 
         self.nametab = []	# table of bit names
         self.gatetab = []	# table of gates
-        self.typetab = []	# table of bit types (0=qubit, 1=cbit)
+        self.typetab = []	# table of bit types (0=qubit, 1=cbit, 2=mqbit)
         self.comments = ''	# string with comments from original qasm file
 
         linenum = 0		# line number counting, for error messages
+
+        def checktype(typename, typenum):
+            # qubit spec - syntax: qubit name
+            m = re.compile('\s+'+typename+'\s+(\S+)').search(line)
+            if(m):
+                self.nametab.append(m.group(1))	# add name
+                self.typetab.append(typenum)		# add as qubit
+                # print("qubit: %s" % m.group(1))
+                return True
+            else:
+                return False
 
         for line in fp:		# loop over input lines
 
@@ -389,20 +403,14 @@ class qasm_parser:	# parser for qasm; inputs lines, returns
             else:
                 self.comments += "% " + line 	# optional - include all input
 
-            # qubit spec - syntax: qubit name
-            m = re.compile('\s+qubit\s+(\S+)').search(line)
-            if(m):
-                self.nametab.append(m.group(1))	# add name
-                self.typetab.append(0)		# add as qubit
-                # print "qubit: %s" % m.group(1)
+            # check for bit definitions and assign type
+            if checktype('qubit',0):
                 continue
-
-            # cbit spec - syntax: cbit name
-            m = re.compile('\s+cbit\s+(\S+)').search(line)
-            if(m):
-                self.nametab.append(m.group(1))	# add name
-                self.typetab.append(1)		# add as cbit
-                # print "cbit: %s" % m.group(1)
+            elif checktype('cbit',1):
+                continue
+            elif checktype('mqubit',2):
+                continue
+            elif checktype('mcbit',3):
                 continue
 
             # gate definition spec - syntax: def name,num-ctrl-qubits,texsym
@@ -455,7 +463,7 @@ class qcircuit:		# quantum circuit class
 
         self.initval = {}	# qubit initial values
         self.finalval = {}      # qubit final values
-        self.is_cbit = {}	# flags to see if a bit is qubit or cbit
+        self.type = {}	        # flags to check bit type
         self.setnames(bitnames,typetab)	# set names & types of qubits
         self.qbtab = {}		# initialize qubit table (assoc array)
                                 # each element in qbtab holds an array
@@ -477,7 +485,7 @@ class qcircuit:		# quantum circuit class
         def do_name(n,type):		# set names & extract initial values
             tmp = n.split(';')			# check for initial value
             self.qubitnames.append(tmp[0])	# add to name list
-            self.is_cbit[tmp[0]] = type		# 0 = qubit, 1 = cbit
+            self.type[tmp[0]] = type		# 0 = qubit, 1 = cbit
             if(len(tmp)==2):
                 if(tmp[1]!=''):                 # add initial value for qubit
                     self.initval[tmp[0]] = tmp[1].split(',')
@@ -541,33 +549,35 @@ class qcircuit:		# quantum circuit class
 
         self.matrix = []
         ntime = len(self.circuit)+2	# total number of timsteps
-        wires = ['n','N']		# single or double wire for qubit/cbit
+        wires = ['n','l','N','L']	# single or double wire for qubit/cbit
 
         for qb in self.qubitnames:	# loop over qubits
             self.matrix.append([])	# start with empty row
             k = 1			# timestep counter
-            cbit = self.is_cbit[qb]	# cbit=0 means qubit type (single wire)
+            type = self.type[qb]	# type=0 means qubit type (single wire)
             gidtab = self.qbtab[qb]	# table of gate IDs
             for gid in gidtab:		# loop over IDs for gates on qubit
                 g = self.optab[gid]	# gate with that ID
                 while(g.timeseq>k):	# output null ops until gate acts
-                    self.matrix[-1].append('%s  ' % wires[cbit])
+                    self.matrix[-1].append('%s  ' % wires[type])
                     k += 1		# increment timestep
-                g.set_bittype(qb,cbit)	# set qubit type (cbit/qubit)
+                g.set_bittype(qb,type)	# set qubit type
                 self.matrix[-1].append(g.xy[qb])
                 k += 1			# increment timestep
-                if(g.texsym=='\meter'):	# if measurement gate then cbit=1
-                    cbit = 1
-                if(g.texsym.find('\dmeter')>=0): # alternative measurement gate
-                    cbit = 1
-                if(g.name=='measure'):	# if measurement gate then cbit=1
-                    cbit = 1		# switch to double wire
-                if(g.name=='zero'):	# if zero gate then cbit=0
-                    cbit = 0		# switch to single wire
+                if(g.texsym=='\meter'):	# if measurement gate then type=1
+                    type = 1
+                if(g.texsym.find('\dmeter')>=0):        # alternative measurement gate
+                    type = 1
+                if(g.name=='measure' and type==0):	# if measurement gate then type=1
+                    type = 1		# switch to double wire
+                elif(g.name=='measure' and type==2):
+                    type = 3            # switch to thick double wire
+                if(g.name=='zero'):	# if zero gate then type=0
+                    type = 0		# switch to single wire
             while(k<ntime):		# fill in null ops until end of circuit
                 k += 1			# unless last g was space or discard
                 if((g.name!='space')&(g.name!='discard')):
-                    self.matrix[-1].append('%s  ' % wires[cbit])
+                    self.matrix[-1].append('%s  ' % wires[type])
 
     def qb2label(self,qb,fin):
         # make latex format label for qubit name
@@ -583,7 +593,7 @@ class qcircuit:		# quantum circuit class
                     labels += ["%s_{%s}" % (m.group(1),m.group(2))]
                 else:
                     labels += [val]
-            if not self.is_cbit[qb]:    # Change label to \q if qubit
+            if self.type[qb]==0 or self.type[qb]==2:    # Change label to \q if qubit
                 labels = [r'\q{%s}' % (val) for val in labels]
             label = '='.join(labels)
         else:

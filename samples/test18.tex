@@ -31,8 +31,8 @@
 % Qubit circuit matrix:
 %
 % q0: gAxA, gBxA, n  , n  
-% q1: n  , gBxB, gCxB, N  
-% q2: gAxC, gBxC, gCxC, N  
+% q1: n  , gBxB, gCxB, l  
+% q2: gAxC, gBxC, gCxC, l  
 % q3: n  , gBxD, n  , n  
 
 \documentclass[11pt]{article}
@@ -64,13 +64,13 @@
 
 \xymatrix@R=5pt@C=10pt{
     \bA & \gAxA &\gBxA &\n   &\n   & \fA
-\\  \bB & \n   &\gBxB &\gCxB &\N   & \fB
-\\  \bC & \gAxC &\gBxC &\gCxC &\N   & \fC
+\\  \bB & \n   &\gBxB &\gCxB &\l   & \fB
+\\  \bC & \gAxC &\gBxC &\gCxC &\l   & \fC
 \\  \bD & \n   &\gBxD &\n   &\n   & \fD
 %
 % vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBxD";"gBxA"\ar@{-}"gBxD";"gBxB"\ar@{-}"gBxD";"gBxC"
+\nv{gBxD}{gBxA}\nv{gBxD}{gBxB}\nv{gBxD}{gBxC}
 }
 
 \end{document}

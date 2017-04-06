@@ -72,9 +72,9 @@
 
 % Qubit circuit matrix:
 %
-% j0: gAxA, gBxA, gCxA, gDxA, gExA, gFxA, gGxA, gHxA, gIxA, N  
-% j1: gAxB, n  , gCxB, gDxB, gExB, n  , gGxB, gHxB, gIxB, N  
-% j2: gAxC, n  , n  , gDxC, n  , gFxC, gGxC, gHxC, gIxC, N  
+% j0: gAxA, gBxA, gCxA, gDxA, gExA, gFxA, gGxA, gHxA, gIxA, l  
+% j1: gAxB, n  , gCxB, gDxB, gExB, n  , gGxB, gHxB, gIxB, l  
+% j2: gAxC, n  , n  , gDxC, n  , gFxC, gGxC, gHxC, gIxC, l  
 % s0: n  , gBxD, gCxD, gDxD, n  , n  , n  , n  , n  , n  
 % s1: n  , gBxE, gCxE, gDxE, n  , n  , n  , n  , n  , n  
 
@@ -128,20 +128,20 @@
 % The quantum circuit as an xymatrix
 
 \xymatrix@R=5pt@C=10pt{
-    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\gIxA &\N   & \fA
-\\  \bB & \gAxB &\n   &\gCxB &\gDxB &\gExB &\n   &\gGxB &\gHxB &\gIxB &\N   & \fB
-\\  \bC & \gAxC &\n   &\n   &\gDxC &\n   &\gFxC &\gGxC &\gHxC &\gIxC &\N   & \fC
+    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\gExA &\gFxA &\gGxA &\gHxA &\gIxA &\l   & \fA
+\\  \bB & \gAxB &\n   &\gCxB &\gDxB &\gExB &\n   &\gGxB &\gHxB &\gIxB &\l   & \fB
+\\  \bC & \gAxC &\n   &\n   &\gDxC &\n   &\gFxC &\gGxC &\gHxC &\gIxC &\l   & \fC
 \\  \bD & \n   &\gBxD &\gCxD &\gDxD &\n   &\n   &\n   &\n   &\n   &\n   & \fD
 \\  \bE & \n   &\gBxE &\gCxE &\gDxE &\n   &\n   &\n   &\n   &\n   &\n   & \fE
 %
 % vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBxD";"gBxA"
-\ar@{-}"gCxD";"gCxB"
-\ar@{-}"gDxD";"gDxC"
-\ar@{-}"gDxB";"gDxA"
-\ar@{-}"gFxC";"gFxA"
-\ar@{-}"gGxC";"gGxB"
+\nv{gBxD}{gBxA}
+\nv{gCxD}{gCxB}
+\nv{gDxD}{gDxC}
+\nv{gDxB}{gDxA}
+\nv{gFxC}{gFxA}
+\nv{gGxC}{gGxB}
 }
 
 \end{document}

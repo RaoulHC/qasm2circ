@@ -41,7 +41,7 @@
 % q0: gAxA, gBxA, gCxA, n  , n  , n  
 % q1: gAxB, gBxB, n  , n  , n  , n  
 % q2: n  , gBxC, gCxC, gDxC, gExC
-% q3: n  , n  , gCxD, gDxD, N  , N  
+% q3: n  , n  , gCxD, gDxD, l  , l  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
@@ -77,12 +77,12 @@
     \bA & \gAxA &\gBxA &\gCxA &\n   &\n   &\n   & \fA
 \\  \bB & \gAxB &\gBxB &\n   &\n   &\n   &\n   & \fB
 \\  \bC & \n   &\gBxC &\gCxC &\gDxC &\gExC & \fC
-\\  \bD & \n   &\n   &\gCxD &\gDxD &\N   &\N   & \fD
+\\  \bD & \n   &\n   &\gCxD &\gDxD &\l   &\l   & \fD
 %
 % vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBxB";"gBxC"
-\ar@{-}"gCxD";"gCxC"
+\nv{gBxB}{gBxC}
+\nv{gCxD}{gCxC}
 }
 
 \end{document}

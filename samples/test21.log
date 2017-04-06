@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=latex 2017.2.15)  6 APR 2017 11:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Arch Linux) (preloaded format=latex 2017.2.15)  6 APR 2017 16:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**samples/test11.idx
-(./samples/test11.idx.tex
+**samples/test21
+(./samples/test21.tex
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (/usr/share/texmf-dist/tex/latex/base/article.cls
@@ -131,12 +131,12 @@ Package: xy 2013/10/06 Xy-pic version 3.8.9
 (/usr/share/texmf-dist/tex/generic/xypic/xytips.tex
  Xy-pic option: More Tips extension v.3.11 loaded))
 \@indexfile=\write4
-\openout4 = `test11.idx.idx'.
+\openout4 = `test21.idx'.
 
 
-Writing index file test11.idx.idx
-No file test11.idx.aux.
-\openout1 = `test11.idx.aux'.
+Writing index file test21.idx
+(samples/test21.aux)
+\openout1 = `test21.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
 LaTeX Font Info:    ... okay on input line 80.
@@ -151,29 +151,23 @@ LaTeX Font Info:    ... okay on input line 80.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 80.
 LaTeX Font Info:    ... okay on input line 80.
 \sbox=\box29
-) <xymatrix)
-Runaway argument?
-{ 
-! File ended while scanning use of \next@.
-<inserted text> 
-                \par 
-<*> samples/test11.idx
-                      
-? 
-! Emergency stop.
-<inserted text> 
-                \par 
-<*> samples/test11.idx
-                      
-End of file on the terminal!
+) <xymatrix
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 62.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 62.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 62.
+ 6x3 1177> [1
 
- 
+] (samples/test21.aux) ) 
 Here is how much of TeX's memory you used:
- 2057 strings out of 493014
- 23237 string characters out of 6139343
- 97622 words of memory out of 5000000
- 5627 multiletter control sequences out of 15000+600000
- 5389 words of font info for 24 fonts, out of 8000000 for 9000
+ 2133 strings out of 493014
+ 23771 string characters out of 6139343
+ 116114 words of memory out of 5000000
+ 5693 multiletter control sequences out of 15000+600000
+ 7828 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,1n,26p,211b,89s stack positions out of 5000i,500n,10000p,200000b,80000s
-No pages of output.
+ 27i,12n,26p,207b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on samples/test21.dvi (1 page, 1640 bytes).

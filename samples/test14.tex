@@ -101,10 +101,10 @@
 % q0: n  , n  , gCxA, n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , gSxA, n  
 % q1: n  , n  , n  , gDxB, n  , n  , n  , n  , n  , n  , n  , n  , gMxB, n  , n  , n  , n  , n  , gSxB, n  
 % q2: n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , n  , gNxC, n  , n  , n  , n  , gSxC, n  
-% s0: gAxD, gBxD, gCxD, n  , gExD, gFxD, gGxD, gHxD, gIxD, gJxD, gKxD, gLxD, gMxD, n  , gOxD, gPxD, gQxD, gRxD, gSxD, N  
-% s1: n  , gBxE, gCxE, gDxE, gExE, gFxE, gGxE, gHxE, gIxE, gJxE, n  , gLxE, gMxE, gNxE, gOxE, gPxE, gQxE, gRxE, gSxE, N  
-% c0: N  , N  , N  , N  , N  , N  , N  , gHxF, N  , N  , N  , N  , N  , N  , N  , N  , N  , gRxF, gSxF, N  
-% c1: N  , N  , N  , N  , N  , N  , N  , N  , gIxG, N  , N  , N  , N  , N  , N  , N  , N  , gRxG, gSxG, N  
+% s0: gAxD, gBxD, gCxD, n  , gExD, gFxD, gGxD, gHxD, gIxD, gJxD, gKxD, gLxD, gMxD, n  , gOxD, gPxD, gQxD, gRxD, gSxD, l  
+% s1: n  , gBxE, gCxE, gDxE, gExE, gFxE, gGxE, gHxE, gIxE, gJxE, n  , gLxE, gMxE, gNxE, gOxE, gPxE, gQxE, gRxE, gSxE, l  
+% c0: l  , l  , l  , l  , l  , l  , l  , gHxF, l  , l  , l  , l  , l  , l  , l  , l  , l  , gRxF, gSxF, l  
+% c1: l  , l  , l  , l  , l  , l  , l  , l  , gIxG, l  , l  , l  , l  , l  , l  , l  , l  , gRxG, gSxG, l  
 
 \documentclass[11pt]{article}
 \input{xyqcirc.tex}
@@ -125,11 +125,11 @@
 \def\gGxD{\meter\w\A{gGxD}}
 \def\gFxE{*-{}\w\A{gFxE}}
 \def\gGxE{\meter\w\A{gGxE}}
-\def\gHxD{\b\W\A{gHxD}}
-\def\gHxF{\o\W\A{gHxF}}
-\def\gHxE{*-{}\W\A{gHxE}}
-\def\gIxE{\b\W\A{gIxE}}
-\def\gIxG{\o\W\A{gIxG}}
+\def\gHxD{\b\c\A{gHxD}}
+\def\gHxF{\o\c\A{gHxF}}
+\def\gHxE{*-{}\c\A{gHxE}}
+\def\gIxE{\b\c\A{gIxE}}
+\def\gIxG{\o\c\A{gIxG}}
 \def\gIxD{\A{gIxD}}
 \def\gJxD{\z\A{gJxD}}
 \def\gJxE{\z\A{gJxE}}
@@ -147,17 +147,17 @@
 \def\gQxD{\meter\w\A{gQxD}}
 \def\gPxE{*-{}\w\A{gPxE}}
 \def\gQxE{\meter\w\A{gQxE}}
-\def\gRxD{\gnqubit{\txt{Process\\Syndrome}}{ddd}\W\A{gRxD}}
-\def\gRxE{\gspace{\txt{Process\\Syndrome}}\W\A{gRxE}}
-\def\gRxF{\gspace{\txt{Process\\Syndrome}}\W\A{gRxF}}
-\def\gRxG{\gspace{\txt{Process\\Syndrome}}\W\A{gRxG}}
+\def\gRxD{\gnqubit{\txt{Process\\Syndrome}}{ddd}\c\A{gRxD}}
+\def\gRxE{\gspace{\txt{Process\\Syndrome}}\c\A{gRxE}}
+\def\gRxF{\gspace{\txt{Process\\Syndrome}}\c\A{gRxF}}
+\def\gRxG{\gspace{\txt{Process\\Syndrome}}\c\A{gRxG}}
 \def\gSxA{\gnqubit{{\cal R}}{dd}\w\A{gSxA}}
 \def\gSxB{\gspace{{\cal R}}\w\A{gSxB}}
 \def\gSxC{\gspace{{\cal R}}\w\A{gSxC}}
-\def\gSxD{\b\W\A{gSxD}}
-\def\gSxE{\b\W\A{gSxE}}
-\def\gSxF{\b\W\A{gSxF}}
-\def\gSxG{\b\W\A{gSxG}}
+\def\gSxD{\b\c\A{gSxD}}
+\def\gSxE{\b\c\A{gSxE}}
+\def\gSxF{\b\c\A{gSxF}}
+\def\gSxG{\b\c\A{gSxG}}
 
 % definitions for bit labels and initial states
 
@@ -182,24 +182,24 @@
     \bA & \n   &\n   &\gCxA &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gSxA &\n   & \fA
 \\  \bB & \n   &\n   &\n   &\gDxB &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gMxB &\n   &\n   &\n   &\n   &\n   &\gSxB &\n   & \fB
 \\  \bC & \n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\n   &\gNxC &\n   &\n   &\n   &\n   &\gSxC &\n   & \fC
-\\  \bD & \gAxD &\gBxD &\gCxD &\n   &\gExD &\gFxD &\gGxD &\gHxD &\gIxD &\gJxD &\gKxD &\gLxD &\gMxD &\n   &\gOxD &\gPxD &\gQxD &\gRxD &\gSxD &\N   & \fD
-\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\gExE &\gFxE &\gGxE &\gHxE &\gIxE &\gJxE &\n   &\gLxE &\gMxE &\gNxE &\gOxE &\gPxE &\gQxE &\gRxE &\gSxE &\N   & \fE
-\\  \bF & \N   &\N   &\N   &\N   &\N   &\N   &\N   &\gHxF &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gRxF &\gSxF &\N   & \fF
-\\  \bG & \N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gIxG &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\N   &\gRxG &\gSxG &\N   & \fG
+\\  \bD & \gAxD &\gBxD &\gCxD &\n   &\gExD &\gFxD &\gGxD &\gHxD &\gIxD &\gJxD &\gKxD &\gLxD &\gMxD &\n   &\gOxD &\gPxD &\gQxD &\gRxD &\gSxD &\l   & \fD
+\\  \bE & \n   &\gBxE &\gCxE &\gDxE &\gExE &\gFxE &\gGxE &\gHxE &\gIxE &\gJxE &\n   &\gLxE &\gMxE &\gNxE &\gOxE &\gPxE &\gQxE &\gRxE &\gSxE &\l   & \fE
+\\  \bF & \l   &\l   &\l   &\l   &\l   &\l   &\l   &\gHxF &\l   &\l   &\l   &\l   &\l   &\l   &\l   &\l   &\l   &\gRxF &\gSxF &\l   & \fF
+\\  \bG & \l   &\l   &\l   &\l   &\l   &\l   &\l   &\l   &\gIxG &\l   &\l   &\l   &\l   &\l   &\l   &\l   &\l   &\gRxG &\gSxG &\l   & \fG
 %
 % vertical lines and other post-xymatrix latex
 %
-\ar@{-}"gBxE";"gBxD"
-\ar@{-}"gCxD";"gCxA"
-\ar@{-}"gDxE";"gDxB"
-\ar@{-}"gExE";"gExD"
-\ar@{=}"gHxF";"gHxD"
-\ar@{=}"gIxG";"gIxE"
-\ar@{-}"gLxE";"gLxD"
-\ar@{-}"gMxD";"gMxB"
-\ar@{-}"gNxE";"gNxC"
-\ar@{-}"gOxE";"gOxD"
-\ar@{=}"gSxC";"gSxD"\ar@{=}"gSxC";"gSxE"\ar@{=}"gSxC";"gSxF"\ar@{=}"gSxC";"gSxG"
+\nv{gBxE}{gBxD}
+\nv{gCxD}{gCxA}
+\nv{gDxE}{gDxB}
+\nv{gExE}{gExD}
+\lv{gHxF}{gHxD}
+\lv{gIxG}{gIxE}
+\nv{gLxE}{gLxD}
+\nv{gMxD}{gMxB}
+\nv{gNxE}{gNxC}
+\nv{gOxE}{gOxD}
+\lv{gSxC}{gSxD}\lv{gSxC}{gSxE}\lv{gSxC}{gSxF}\lv{gSxC}{gSxG}
 }
 
 \end{document}

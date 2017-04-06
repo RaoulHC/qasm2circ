@@ -68,7 +68,7 @@
 \makeindex
 \pagestyle{empty}
 
-\setlength{\oddsidemargin}{-0.5in}	% 1.25in left margin 
+\setlength{\oddsidemargin}{-0.5in}	% 1.25in left margin
 \setlength{\evensidemargin}{-0.5in}	% 1.25in left margin (even pages)
 
 \setlength{\topmargin}{0.0in}		% 1in top margin
@@ -85,7 +85,10 @@
 % wires
 
 \def\w{\ar@{-}[l]}
-\def\W{\ar@{=}[l]}
+\def\c{\ar@{=}[l]}
+\def\W{\ar@{-}[l]<-.07ex> \ar@{-}[l]<-.07ex> \ar@{-}[l]}
+\def\C{\ar@{=}[l]<-.07ex> \ar@{=}[l]<-.07ex> \ar@{=}[l]}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % labels
@@ -109,8 +112,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % nop's
 
-\def\N{*-{}\W}
 \def\n{*-{}\w}
+\def\l{*-{}\c}
+\def\N{*-{}\W}
+\def\L{*-{}\C}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% vertical lines
+\def\nv#1#2{\ar@{-}"#1";"#2"}
+\def\lv#1#2{\ar@{=}"#1";"#2"}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % misc definitions
@@ -121,7 +131,7 @@
 
 % measurement box
 \def\meter{*+[]{\put(-3,0){\includegraphics[scale=.5]{meter.epsf}}~~~~}%
-		\ar@{-}[l]}
+        \ar@{-}[l]}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % qubit names (and also revert to qubit wires, vs, cbit wires)
@@ -129,7 +139,7 @@
 \def\qrule{\rule[-0.2ex]{0ex}{2.1ex}}
 \def\q#1{|#1\>}
 \def\qv#1#2{*+{\qrule|#1\>=|#2\>}}
-	
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % multiple qubit gates
 
@@ -138,13 +148,13 @@
 
 % empty space of width determined by the text argument
 \def\gspace#1{*+{\rule[-0.2ex]{0ex}{2.1ex}%
-	\setbox\sbox=\hbox{$#1$}%
-	\hspace*{\wd\sbox}}}
-	
+    \setbox\sbox=\hbox{$#1$}%
+    \hspace*{\wd\sbox}}}
+
 % n-qubit operation #1=box label, #2=number of qubits (eg d=2 qubits, ddd=4)
 \def\gnqubit#1#2{\gspace{#1}
-		 \save [].[#2]!C="qq"*[F]\frm{}\restore
-		 \save "qq"*[]{#1} \restore}
+         \save [].[#2]!C="qq"*[F]\frm{}\restore
+         \save "qq"*[]{#1} \restore}
 
 % two-qubit operation
 \def\gtwo#1{\gnqubit{#1}{d}}
@@ -156,10 +166,10 @@
 % ``D'' style measurement gate a-la-cleve, at Michael Nielsen's request
 
 \def\dmeterwide#1#2{*{\xy <0pt,-8pt>;<0pt,8pt> **@{-};
-		    <0pt,-8pt>;<#2,-8pt> **@{-} ;
-		    <0pt, 8pt>;<#2, 8pt> **@{-} ;
-		    <#2,0pt>-<5pt,0pt>*{#1} ;
-		    <#2,0pt>*\cir<8pt>{r_l}\endxy}}
+            <0pt,-8pt>;<#2,-8pt> **@{-} ;
+            <0pt, 8pt>;<#2, 8pt> **@{-} ;
+            <#2,0pt>-<5pt,0pt>*{#1} ;
+            <#2,0pt>*\cir<8pt>{r_l}\endxy}}
 
 \def\dmeter#1{\dmeterwide{#1}{12pt}}
 
