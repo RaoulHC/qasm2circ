@@ -8,7 +8,7 @@ Licensed under GNU General Public License
 Features to add
 * [x] Move to python3.
 * [x] Add states to end of qubits timeline.
-* [ ] Make starting state labels optional.
+* [x] Make starting state labels optional.
+* [x] Add thick lines to represent multiple qubits/cbits.
 * [ ] Add labels in the middle of qubit timelines.
-* [ ] Add thick lines to represent multiple qubits.
 * [ ] Add use of ellipses to represent a continued series of qubits.
