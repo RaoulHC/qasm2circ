@@ -1,0 +1,178 @@
+% quantum Fourier transform circuit
+% 
+%   def R2,1,'R_2'
+%   def Rn-2,1,'R_{n-2}'
+%   def Rn-1,1,'R_{n-1}'
+%   def Rn,1,'R_n'
+% 
+%   qubit q1;j1
+%   qubit q2;j2
+%   qubit q3;j3
+%   qubit qn-1;j_{n-1}
+%   qubit qn;j_n
+% 
+%   h     q1
+%   R2    q2,q1
+%   etc
+%   Rn-1  qn-1,q1
+%   Rn    qn,q1
+% 
+%   nop   q2
+%   nop   q2
+%   h     q2
+%   R2    q3,q2
+%   etc
+%   Rn-2  qn-1,q2
+%   Rn-1  qn,q2
+% 
+%   etc
+% 
+%   nop   qn-1
+%   h     qn-1
+%   R2    qn,qn-1
+% 
+%   h     qn
+% 
+%   nop q2
+%   nop qn-1
+%   swap q2,qn-1
+% 
+%   nop q1
+%   nop qn
+%   swap q1,qn
+
+%  Time 01:
+%    Gate 00 h(q1)
+%  Time 02:
+%    Gate 01 R2(q2,q1)
+%  Time 03:
+%    Gate 02 etc(q1,q2,q3,qn-1,qn)
+%  Time 04:
+%    Gate 03 Rn-1(qn-1,q1)
+%    Gate 05 nop(q2)
+%  Time 05:
+%    Gate 04 Rn(qn,q1)
+%    Gate 06 nop(q2)
+%  Time 06:
+%    Gate 07 h(q2)
+%  Time 07:
+%    Gate 08 R2(q3,q2)
+%  Time 08:
+%    Gate 09 etc(q1,q2,q3,qn-1,qn)
+%  Time 09:
+%    Gate 10 Rn-2(qn-1,q2)
+%  Time 10:
+%    Gate 11 Rn-1(qn,q2)
+%  Time 11:
+%    Gate 12 etc(q1,q2,q3,qn-1,qn)
+%  Time 12:
+%    Gate 13 nop(qn-1)
+%    Gate 17 nop(q2)
+%    Gate 20 nop(q1)
+%  Time 13:
+%    Gate 14 h(qn-1)
+%  Time 14:
+%    Gate 15 R2(qn,qn-1)
+%  Time 15:
+%    Gate 16 h(qn)
+%    Gate 18 nop(qn-1)
+%  Time 16:
+%    Gate 19 swap(q2,qn-1)
+%    Gate 21 nop(qn)
+%  Time 17:
+%    Gate 22 swap(q1,qn)
+
+% Qubit circuit matrix:
+%
+% q1: gAxA, gBxA, gCxA, gDxA, gExA, n, n, gHxA, n, n, gKxA, gLxA, n, n, n, n, gQxA, n
+% q2: n, gBxB, gCxB, gDxB, gExB, gFxB, gGxB, gHxB, gIxB, gJxB, gKxB, gLxB, n, n, n, gPxB, n, n
+% q3: n, n, gCxC, n, n, n, gGxC, gHxC, n, n, gKxC, n, n, n, n, n, n, n
+% qn-1: n, n, gCxD, gDxD, n, n, n, gHxD, gIxD, n, gKxD, gLxD, gMxD, gNxD, gOxD, gPxD, n, n
+% qn: n, n, gCxE, n, gExE, n, n, gHxE, n, gJxE, gKxE, n, n, gNxE, gOxE, gPxE, gQxE, n
+
+\documentclass[11pt]{article}
+\input{xyqcirc.tex}
+
+% definitions for the circuit elements
+
+\def\gAxA{\op{H}\w\A{gAxA}}
+\def\gBxB{\b\w\A{gBxB}}
+\def\gBxA{\op{R_2}\w\A{gBxA}}
+\def\gCxA{\w\e\A{gCxA}}
+\def\gCxB{\w\e\A{gCxB}}
+\def\gCxC{\w\e\A{gCxC}}
+\def\gCxD{\w\e\A{gCxD}}
+\def\gCxE{\w\e\A{gCxE}}
+\def\gDxD{\b\w\A{gDxD}}
+\def\gDxA{\op{R_{n-1}}\w\A{gDxA}}
+\def\gExE{\b\w\A{gExE}}
+\def\gExA{\op{R_n}\w\A{gExA}}
+\def\gDxB{*-{}\w\A{gDxB}}
+\def\gExB{*-{}\w\A{gExB}}
+\def\gFxB{\op{H}\w\A{gFxB}}
+\def\gGxC{\b\w\A{gGxC}}
+\def\gGxB{\op{R_2}\w\A{gGxB}}
+\def\gHxA{\w\e\A{gHxA}}
+\def\gHxB{\w\e\A{gHxB}}
+\def\gHxC{\w\e\A{gHxC}}
+\def\gHxD{\w\e\A{gHxD}}
+\def\gHxE{\w\e\A{gHxE}}
+\def\gIxD{\b\w\A{gIxD}}
+\def\gIxB{\op{R_{n-2}}\w\A{gIxB}}
+\def\gJxE{\b\w\A{gJxE}}
+\def\gJxB{\op{R_{n-1}}\w\A{gJxB}}
+\def\gKxA{\w\e\A{gKxA}}
+\def\gKxB{\w\e\A{gKxB}}
+\def\gKxC{\w\e\A{gKxC}}
+\def\gKxD{\w\e\A{gKxD}}
+\def\gKxE{\w\e\A{gKxE}}
+\def\gLxD{*-{}\w\A{gLxD}}
+\def\gMxD{\op{H}\w\A{gMxD}}
+\def\gNxE{\b\w\A{gNxE}}
+\def\gNxD{\op{R_2}\w\A{gNxD}}
+\def\gOxE{\op{H}\w\A{gOxE}}
+\def\gLxB{*-{}\w\A{gLxB}}
+\def\gOxD{*-{}\w\A{gOxD}}
+\def\gPxB{\t\w\A{gPxB}}
+\def\gPxD{\t\w\A{gPxD}}
+\def\gLxA{*-{}\w\A{gLxA}}
+\def\gPxE{*-{}\w\A{gPxE}}
+\def\gQxA{\t\w\A{gQxA}}
+\def\gQxE{\t\w\A{gQxE}}
+
+% definitions for bit labels and initial states
+
+\def\bA{\qrule \q{j_{1}}}
+\def\bB{\qrule \q{j_{2}}}
+\def\bC{\qrule \q{j_{3}}}
+\def\bD{\qrule \q{j_{n-1}}}
+\def\bE{\qrule \q{j_n}}
+\def\fA{\qrule}
+\def\fB{\qrule}
+\def\fC{\qrule}
+\def\fD{\qrule}
+\def\fE{\qrule}
+
+% The quantum circuit as an xymatrix
+
+\xymatrix@R=5pt@C=10pt{
+    \bA & \gAxA &\gBxA &\gCxA &\gDxA &\gExA &\n &\n &\gHxA &\n &\n &\gKxA &\gLxA &\n &\n &\n &\n &\gQxA &\n & \fA
+\\  \bB & \n &\gBxB &\gCxB &\gDxB &\gExB &\gFxB &\gGxB &\gHxB &\gIxB &\gJxB &\gKxB &\gLxB &\n &\n &\n &\gPxB &\n &\n & \fB
+\\  \bC & \n &\n &\gCxC &\n &\n &\n &\gGxC &\gHxC &\n &\n &\gKxC &\n &\n &\n &\n &\n &\n &\n & \fC
+\\  \bD & \n &\n &\gCxD &\gDxD &\n &\n &\n &\gHxD &\gIxD &\n &\gKxD &\gLxD &\gMxD &\gNxD &\gOxD &\gPxD &\n &\n & \fD
+\\  \bE & \n &\n &\gCxE &\n &\gExE &\n &\n &\gHxE &\n &\gJxE &\gKxE &\n &\n &\gNxE &\gOxE &\gPxE &\gQxE &\n & \fE
+%
+% vertical lines and other post-xymatrix latex
+%
+\nv{gBxA}{gBxB}
+\nv{gDxA}{gDxD}
+\nv{gExA}{gExE}
+\nv{gGxB}{gGxC}
+\nv{gIxB}{gIxD}
+\nv{gJxB}{gJxE}
+\nv{gNxD}{gNxE}
+\nv{gPxB}{gPxD}
+\nv{gQxA}{gQxE}
+}
+
+\end{document}

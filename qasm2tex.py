@@ -225,7 +225,7 @@ class qgate:		# quantum gate class
         (self.nbits, self.nctrl, self.texsym) = GateMasterDef[self.name]
 
         # check if the operand has the right number of bits
-        if (len(self.qubits) != self.nbits): # right # bits?
+        if (len(self.qubits) != self.nbits and self.nbits!=0): # right # bits?
             s = (self.linenum, self.name + " " + self.args)
             do_error("[qgate] OOPS! line %d wrong number of qubits in %s" % s)
 
@@ -253,7 +253,7 @@ class qgate:		# quantum gate class
 
         def defid(k,op):		# latex def for given gate & qubit
             myid = self.xy[self.qubits[k]]
-            wires = ['\w','\c','\W', '\C']	# [single,double,bold,bold double]
+            wires = ['\w','\c','\W','\C']	# [single,double,bold,bold double]
             mywire = wires[self.wiretype[self.qubits[k]]]
             return('\def\%s{%s%s\A{%s}}' % (myid,op,mywire,myid))
 
@@ -329,6 +329,14 @@ class qgate:		# quantum gate class
 
             return(s)
 
+        def do_etc(u):
+            s = []
+            for k in range(len(self.qubits)):
+                myid = self.xy[self.qubits[k]]
+                s.append('\def\%s{\w\e\A{%s}}' % (myid,myid))
+            s = '\n'.join(s)
+            return(s)
+
         def check_multi_qubit_gate_targets(nctrl):
             # gate targets (not controls) must be consecutive bits
             ytab = [self.yloc[qb] for qb in self.qubits[nctrl:]]
@@ -360,6 +368,8 @@ class qgate:		# quantum gate class
             return(double_sym_gate(texsym))
         if(self.name=='swap'):		# special for swap gate
             return(double_sym_gate(texsym))
+        if(self.name=='etc'):
+            return(do_etc(texsym))      # special for etc.
         if(nbits-nctrl>1):			# multi-qubit gate
             check_multi_qubit_gate_targets(nctrl)
             return(do_multiqubit(nbits,nctrl,texsym))
@@ -453,6 +463,17 @@ class qasm_parser:	# parser for qasm; inputs lines, returns
             if(m):
                 op = m.group(1)
                 args = m.group(2)
+                self.gatetab.append(qgate(op,args,linenum))
+                continue
+
+            # gate acting on everything
+            m = re.compile('\s+(\S+)').search(line)
+            if(m):
+                op = m.group(1)
+                argslist = [] 
+                for qb in self.nametab:
+                    argslist.append(qb.split(';')[0])
+                args = ','.join(argslist)
                 self.gatetab.append(qgate(op,args,linenum))
 
 #-----------------------------------------------------------------------------
@@ -549,7 +570,7 @@ class qcircuit:		# quantum circuit class
 
         self.matrix = []
         ntime = len(self.circuit)+2	# total number of timsteps
-        wires = ['n','l','N','L']	# single or double wire for qubit/cbit
+        wires = ['n','l','N','L','d']	# single or double wire for qubit/cbit
 
         for qb in self.qubitnames:	# loop over qubits
             self.matrix.append([])	# start with empty row
@@ -559,7 +580,7 @@ class qcircuit:		# quantum circuit class
             for gid in gidtab:		# loop over IDs for gates on qubit
                 g = self.optab[gid]	# gate with that ID
                 while(g.timeseq>k):	# output null ops until gate acts
-                    self.matrix[-1].append('%s  ' % wires[type])
+                    self.matrix[-1].append('%s' % wires[type])
                     k += 1		# increment timestep
                 g.set_bittype(qb,type)	# set qubit type
                 self.matrix[-1].append(g.xy[qb])
@@ -574,10 +595,12 @@ class qcircuit:		# quantum circuit class
                     type = 3            # switch to thick double wire
                 if(g.name=='zero'):	# if zero gate then type=0
                     type = 0		# switch to single wire
+
+
             while(k<ntime):		# fill in null ops until end of circuit
                 k += 1			# unless last g was space or discard
                 if((g.name!='space')&(g.name!='discard')):
-                    self.matrix[-1].append('%s  ' % wires[type])
+                    self.matrix[-1].append('%s' % wires[type])
 
     def qb2label(self,qb,fin):
         # make latex format label for qubit name
@@ -693,7 +716,8 @@ GateMasterDef = {'cnot'     : ( 2 , 1 , '\o'        ),
                  'space'    : ( 1 , 0 , ''          ),
                  'swap'     : ( 2 , 0 , r'\t'       ),
                  'toffoli'  : ( 3 , 2 , r'\o'       ),
-                 'Utwo'     : ( 2 , 0 , 'U'         )
+                 'Utwo'     : ( 2 , 0 , 'U'         ),
+                 'etc'      : ( 0 , 0 , r'\e'        )
                  }
 
 #-----------------------------------------------------------------------------
